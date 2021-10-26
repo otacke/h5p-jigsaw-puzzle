@@ -12,7 +12,7 @@
     "h5p",
     "library"
   ],
-  "author": "Kidsloop",
+  "author": "KidsLoop",
   "license": "cr",
   "devDependencies": {
     "@babel/cli": "^7.15.4",
