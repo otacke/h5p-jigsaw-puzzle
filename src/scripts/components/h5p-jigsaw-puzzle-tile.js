@@ -440,8 +440,8 @@ export default class JigsawPuzzleTile {
 
     this.callbacks.onPuzzleTileCreated(this);
 
-    this.tile.addEventListener('touchstart', this.handleTileMoveStarted, false);
-    this.tile.addEventListener('mousedown', this.handleTileMoveStarted, false);
+    this.tile.addEventListener('touchstart', this.handleTileMoveStarted, true);
+    this.tile.addEventListener('mousedown', this.handleTileMoveStarted, true);
   }
 
   /**
@@ -455,21 +455,20 @@ export default class JigsawPuzzleTile {
 
     event = event || window.event;
     event.preventDefault();
-    event.stopPropagation();
 
     // Keep track of starting click position in absolute pixels
     // Listeners for moving and dropping
     if (event.type === 'touchstart') {
-      this.moveInitialX = event.touches[0].clientX;
-      this.moveInitialY = event.touches[0].clientY;
+      this.moveInitialX = this.tile.offsetLeft - event.touches[0].clientX;
+      this.moveInitialY = this.tile.offsetTop - event.touches[0].clientY;
       this.tile.addEventListener('touchmove', this.handleTileMoved, false);
       this.tile.addEventListener('touchend', this.handleTileMoveEnded, false);
     }
     else {
-      this.moveInitialX = event.clientX;
-      this.moveInitialY = event.clientY;
-      this.tile.addEventListener('mousemove', this.handleTileMoved, false);
-      this.tile.addEventListener('mouseup', this.handleTileMoveEnded, false);
+      this.moveInitialX = this.tile.offsetLeft - event.clientX;
+      this.moveInitialY = this.tile.offsetTop - event.clientY;
+      document.addEventListener('mousemove', this.handleTileMoved, true);
+      document.addEventListener('mouseup', this.handleTileMoveEnded, true);
     }
 
     this.callbacks.onPuzzleTileMoveStarted(this);
@@ -482,30 +481,20 @@ export default class JigsawPuzzleTile {
   handleTileMoved(event) {
     event = event || window.event;
     event.preventDefault();
-    event.stopPropagation();
-
-    let deltaX = 0;
-    let deltaY = 0;
 
     // Update position
     if (event.type === 'touchmove') {
-      deltaX = this.moveInitialX - event.touches[0].clientX;
-      deltaY = this.moveInitialY - event.touches[0].clientY;
-      this.moveInitialX = event.touches[0].clientX;
-      this.moveInitialY = event.touches[0].clientY;
+      this.setPosition({
+        x: this.moveInitialX + event.touches[0].clientX,
+        y: this.moveInitialY + event.touches[0].clientY
+      });
     }
     else {
-      deltaX = this.moveInitialX - event.clientX;
-      deltaY = this.moveInitialY - event.clientY;
-      this.moveInitialX = event.clientX;
-      this.moveInitialY = event.clientY;
+      this.setPosition({
+        x: this.moveInitialX + event.clientX,
+        y: this.moveInitialY + event.clientY
+      });
     }
-
-    const currentPosition = this.getPosition();
-    this.setPosition({
-      x: currentPosition.x - deltaX,
-      y: currentPosition.y - deltaY
-    });
 
     this.callbacks.onPuzzleTileMoved(this);
   }
@@ -514,16 +503,12 @@ export default class JigsawPuzzleTile {
    * Handle tile stopped moving.
    * @param {Event} event MouseEvent|TouchEvent.
    */
-  handleTileMoveEnded(event) {
-    event = event || window.event;
-    event.preventDefault();
-    event.stopPropagation();
-
+  handleTileMoveEnded() {
     // Remove listeners
-    this.tile.removeEventListener('mousemove', this.handleTileMoved);
-    this.tile.removeEventListener('touchmove', this.handleTileMoved);
-    this.tile.removeEventListener('mouseup', this.handleTileMoveEnded);
-    this.tile.removeEventListener('touchend', this.handleTileMoveEnded);
+    this.tile.removeEventListener('touchmove', this.handleTileMoved, false);
+    this.tile.removeEventListener('touchend', this.handleTileMoveEnded, false);
+    document.removeEventListener('mousemove', this.handleTileMoved, true);
+    document.removeEventListener('mouseup', this.handleTileMoveEnded, true);
 
     this.callbacks.onPuzzleTileMoveEnded(this);
   }
