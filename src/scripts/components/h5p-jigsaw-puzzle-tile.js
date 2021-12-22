@@ -462,6 +462,8 @@ export default class JigsawPuzzleTile {
     if (event.type === 'touchstart') {
       this.moveInitialX = event.touches[0].clientX;
       this.moveInitialY = event.touches[0].clientY;
+      this.tile.addEventListener('touchmove', this.handleTileMoved, false);
+      this.tile.addEventListener('touchend', this.handleTileMoveEnded, false);
     }
     else {
       this.moveInitialX = event.clientX;
