@@ -377,9 +377,11 @@ export default class JigsawPuzzleContent {
    * Add audios.
    */
   addAudios() {
-    if (!this.params.sound) {
+    if (!this.params.sound || this.audiosDefined || !H5P.SoundJS.initializeDefaultPlugins()) {
       return;
     }
+
+    H5P.SoundJS.alternateExtensions = ['mp3'];
 
     // Add custom overrides of default included audios
     [
@@ -387,36 +389,11 @@ export default class JigsawPuzzleContent {
       'puzzleTileIncorrect', 'puzzleCompleted'
     ].forEach(id => {
       if (this.params.sound[id] && this.params.sound[id].length > 0 && this.params.sound[id][0].path) {
-        this.addAudio(id, H5P.getPath(this.params.sound[id][0].path, this.params.contentId));
+        H5P.SoundJS.registerSound(H5P.getPath(this.params.sound[id][0].path, this.params.contentId), id);
       }
     });
-  }
 
-  /**
-   * Add single audio.
-   * @param {string} id Id.
-   * @param {string} path File path.
-   * @param {object} params Extra parameters.
-   */
-  addAudio(id, path, params = {}) {
-    this.removeAudio(id);
-
-    const player = document.createElement('audio');
-    // Some service requires (invisible) DOM element for replication
-    player.classList.add('h5p-invisible-audio');
-    this.content.appendChild(player);
-
-    if (params.loop) {
-      player.loop = true;
-    }
-    if (params.volume) {
-      player.volume = params.volume;
-    }
-    player.src = path;
-    this.audios[id] = {
-      player: player,
-      promise: null
-    };
+    this.audiosDefined = true;
   }
 
   /**
@@ -432,65 +409,14 @@ export default class JigsawPuzzleContent {
    * @param {string} id Id.
    */
   startAudio(id) {
-    if (!this.audios[id]) {
-      return;
-    }
-
-    if (!this.isAudioEnabled) {
-      return; // Audio is disabled by user
-    }
-
-    this.stopAudios();
-
-    const currentAudio = this.audios[id];
-    if (!currentAudio) {
-      return;
-    }
-
-    if (!currentAudio.promise) {
-      currentAudio.promise = currentAudio.player.play();
-      currentAudio.promise
-        .finally(() => {
-          currentAudio.promise = null;
-        })
-        .catch(() => {
-          // Browser policy prevents playing
-          console.warn('H5P.JigsawPuzzle: Playing audio is prevented by browser policy');
-        });
-    }
-  }
-
-  /**
-   * Stop audio.
-   * @param {string} id Id.
-   */
-  stopAudio(id) {
-    if (!this.audios[id]) {
-      return;
-    }
-
-    const currentAudio = this.audios[id];
-
-    if (currentAudio.promise) {
-      currentAudio.promise.then(() => {
-        currentAudio.player.pause();
-        currentAudio.player.load(); // Reset
-        currentAudio.promise = null;
-      });
-    }
-    else {
-      currentAudio.player.pause();
-      currentAudio.player.load(); // Reset
-    }
+    H5P.SoundJS.play(id, H5P.SoundJS.INTERRUPT_NONE, 0);
   }
 
   /**
    * Stop audios
    */
   stopAudios() {
-    for (let audio in this.audios) {
-      this.stopAudio(audio);
-    }
+    H5P.SoundJS.stop();
   }
 
   /**
@@ -866,7 +792,7 @@ export default class JigsawPuzzleContent {
     }
 
     // Use audio
-    if (Object.keys(this.audios).length) {
+    if (this.audiosDefined) {
       this.titlebar.showAudioButton();
       this.titlebar.enableAudioButton();
       this.isAudioEnabled = this.params?.previousState?.audioButtonState || true;
