@@ -3,6 +3,7 @@
 .h5p-jigsaw-puzzle {
 
   .h5p-jigsaw-puzzle-puzzle-area {
+    touch-action: manipulation;
 
     .h5p-jigsaw-puzzle-tile {
       position: absolute;
