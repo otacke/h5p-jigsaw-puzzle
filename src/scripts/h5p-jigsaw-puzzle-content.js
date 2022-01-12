@@ -390,6 +390,7 @@ export default class JigsawPuzzleContent {
     ].forEach(id => {
       if (this.params.sound[id] && this.params.sound[id].length > 0 && this.params.sound[id][0].path) {
         H5P.SoundJS.registerSound(H5P.getPath(this.params.sound[id][0].path, this.params.contentId), id);
+        this.hasAudios = true;
       }
     });
 
@@ -788,7 +789,7 @@ export default class JigsawPuzzleContent {
     }
 
     // Use audio
-    if (this.audiosDefined) {
+    if (this.hasAudios) {
       this.titlebar.showAudioButton();
       this.titlebar.enableAudioButton();
       this.isAudioEnabled = this.params?.previousState?.audioButtonState || true;
