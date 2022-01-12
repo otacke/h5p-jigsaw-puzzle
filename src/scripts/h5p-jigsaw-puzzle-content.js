@@ -397,14 +397,6 @@ export default class JigsawPuzzleContent {
   }
 
   /**
-   * Remove audio.
-   * @param {string} id Id.
-   */
-  removeAudio(id) {
-    delete this.audios[id];
-  }
-
-  /**
    * Start audio.
    * @param {string} id Id.
    */
