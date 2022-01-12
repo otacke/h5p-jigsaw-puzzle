@@ -409,6 +409,10 @@ export default class JigsawPuzzleContent {
    * @param {string} id Id.
    */
   startAudio(id) {
+    if (!this.isAudioEnabled) {
+      return;
+    }
+
     H5P.SoundJS.play(id, H5P.SoundJS.INTERRUPT_NONE, 0);
   }
 
