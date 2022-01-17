@@ -908,7 +908,7 @@ export default class JigsawPuzzleContent {
     };
 
     // If tile if dropped close enough to target, snap it there
-    const slack = Math.min(currentSize.baseWidth, currentSize.baseHeight) * JigsawPuzzleContent.SLACK_FACTOR;
+    const slack = Math.min(currentSize.width, currentSize.height) * JigsawPuzzleContent.SLACK_FACTOR;
     if (
       (Math.abs(currentPosition.x - targetPosition.x) < slack) &&
       (Math.abs(currentPosition.y - targetPosition.y) < slack)
