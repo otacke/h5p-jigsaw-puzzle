@@ -483,6 +483,7 @@ export default class JigsawPuzzleContent {
   reset() {
     setTimeout(() => {
       this.tiles.forEach(tile => {
+        this.showTileBorders(tile.instance);
         tile.instance.enable();
         tile.instance.setDone(false);
         this.randomizeTiles({
@@ -650,6 +651,22 @@ export default class JigsawPuzzleContent {
     if (!currentPuzzleOutline.isConnected) {
       this.puzzleDropzone.appendChild(currentPuzzleOutline);
     }
+  }
+
+  /**
+   * Show all tile borders
+   * @param {JigsawPuzzleTile} tile Tile to show borders of.
+   */
+  showTileBorders(tile) {
+    tile.updateParams({
+      borders: {
+        top: {opacity: 1},
+        bottom: {opacity: 1},
+        left: {opacity: 1},
+        right: {opacity: 1}
+      }
+    });
+    tile.repaintSVG();
   }
 
   /**
