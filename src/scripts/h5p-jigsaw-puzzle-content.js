@@ -509,6 +509,11 @@ export default class JigsawPuzzleContent {
     // All tile ids in random order
     let tilesToRandomize = Util.shuffleArray(this.tiles);
 
+    // Randomize position in DOM
+    for (var i = tilesToRandomize.length; i >= 0; i--) {
+      this.puzzleArea.appendChild(tilesToRandomize[Math.random() * i | 0].instance.getDOM());
+    }
+
     if (params.keepDone) {
       // Don't shuffle tiles that had already been placed correctly
       tilesToRandomize = tilesToRandomize.map(tile => (tile.instance.isDone) ? null : tile);
