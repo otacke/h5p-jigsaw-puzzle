@@ -1,0 +1,127 @@
+{
+    "semantics": [
+        {
+            "description": "Lauzek moztu beharko duten irudia.",
+            "label": "Puzzlearen irudia"
+        },
+        {
+            "label": "Lauzak horizontalki",
+            "description": "Zehaztu puzzle buru-hausgarriak horizontalki zenbat puzzle-lauza izan behar dituen."
+        },
+        {
+            "label": "Lauzak bertikalki",
+            "description": "Zehaztu puzzle buru-hausgarriak bertikalki zenbat puzzle-lauza izan behar dituen."
+        },
+        {
+            "label": "Soinuaren ezarpenak",
+            "fields": [
+                {
+                    "label": "Hasi puzzlea",
+                    "description": "Puzzlea hastean erreproduzitu behar den soinua."
+                },
+                {
+                    "label": "Hartu puzzle-lauza",
+                    "description": "Puzzle-lauza hartzean erreproduzitu behar den soinua."
+                },
+                {
+                    "label": "Askatu puzzle-lauza (leku okerrean)",
+                    "description": "Puzzle-lauza leku okerrean askatzean erreproduzitu behar den soinua."
+                },
+                {
+                    "label": "Askatu puzzle-lauza leku zuzenean",
+                    "description": "Puzzle-lauza leku zuzenean askatzean erreproduzitu behar den soinua."
+                },
+                {
+                    "label": "Osatu puzzlea",
+                    "description": "Puzzlea osatzean erreproduzitu behar den soinua."
+                }
+            ],
+            "description": "Aukera hauen bitartez soinuarekin lotutako ezarpenak zehaztu ahalko dituzu."
+        },
+        {
+            "label": "Portaeraren ezarpenak",
+            "fields": [
+                {
+                    "label": "Erakutsi atzeko plano ahula",
+                    "description": "Erakutsi atzeko planoko irudiaren bertsio ahuldua puzzle-lauza bat non joan behar den adierazteko."
+                },
+                {
+                    "label": "Erakutsi puzzlearen siluetak",
+                    "description": "Erakutsi puzzlearen siluetak puzzle-lauza bat non joan behar den adierazteko."
+                },
+                {
+                    "label": "Ordenatze-espazioa",
+                    "description": "Zehaztu ehunekotan lauzak ordenatzeko zenbat espazio utzi beharko litzatekeen puzzle buru-hausgarriaren ondoan."
+                },
+                {
+                    "label": "Erabili eremu osoa",
+                    "description": "Zehaztu hasieran lauzek eremu osoa (lauzak kokatu beharreko eremua barne) beteko duten."
+                },
+                {
+                    "label": "Gaitu \"Osatu\" botoia"
+                },
+                {
+                    "label": "Gaitu \"Berriz saiatu\" botoia"
+                },
+                {
+                    "label": "Gaitu \"Emaitza\" botoia"
+                }
+            ],
+            "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute."
+        },
+        {
+            "label": "Erabiltzaile-interfazea",
+            "fields": [
+                {
+                    "default": "Osatu",
+                    "label": "\"Osatu\" botoiarentzako testua"
+                },
+                {
+                    "label": "\"Berriz saiatu\" botoiarentzako testua",
+                    "default": "Berriz saiatu"
+                },
+                {
+                    "label": "\"Irudirik ez\" testuarentzako mezua",
+                    "default": "Ez da irudirik zehaztu puzzle buru-hausgarri honentzako."
+                }
+            ]
+        },
+        {
+            "label": "Irakurtzen duen bozgorailua",
+            "fields": [
+                {
+                    "default": "Osatu ezazu puzzlea. Lauza guztiak posizio zuzenean jarri beharko dira.",
+                    "label": "\"Osatu\" botoiaren laguntza-teknologientzako etiketa"
+                },
+                {
+                    "label": "\"Berriz saiatu\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Berriz saiatu puzzlea egiten. Puzzle-lauza guztiak berriz nahastuko dira."
+                },
+                {
+                    "label": "\"Ikusi pantaila osoan botoia\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Ikusi pantaila osoan"
+                },
+                {
+                    "label": "\"Atera pantaila osoko modutik botoia\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Atera pantaila osoko modutik"
+                },
+                {
+                    "label": "\"Mututu\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Mututu audioa"
+                },
+                {
+                    "label": "\"Zabaldu mikrofonoa\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Zabaldu mikrofonoa"
+                },
+                {
+                    "label": "\"Desgaituta\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Desgaituta"
+                },
+                {
+                    "label": "\"Itxi\" botoiaren laguntza-teknologientzako etiketa",
+                    "default": "Itxi"
+                }
+            ]
+        }
+    ]
+}
