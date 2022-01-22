@@ -402,10 +402,11 @@ export default class JigsawPuzzleTile {
    * Animate moving until moving ended.
    */
   animateMove() {
-    // Will otherwise animate while dragging
+    // Prevent previous animation from removing the animate-move class
     this.tile.removeEventListener('transitionend', this.handleAnimationMoveEnded);
     this.tile.addEventListener('transitionend', this.handleAnimationMoveEnded);
 
+    // Will be removed by transitionend listener
     this.tile.classList.add('animate-move');
   }
 
@@ -452,6 +453,9 @@ export default class JigsawPuzzleTile {
     if (this.isDisabled) {
       return;
     }
+
+    // Would otherwise delay movement
+    this.tile.classList.remove('animate-move');
 
     event = event || window.event;
     event.preventDefault();
@@ -509,6 +513,8 @@ export default class JigsawPuzzleTile {
     this.tile.removeEventListener('touchend', this.handleTileMoveEnded, false);
     document.removeEventListener('mousemove', this.handleTileMoved, true);
     document.removeEventListener('mouseup', this.handleTileMoveEnded, true);
+
+    this.tile.classList.add('animate-move');
 
     this.callbacks.onPuzzleTileMoveEnded(this);
   }
