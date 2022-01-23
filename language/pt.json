@@ -1,0 +1,242 @@
+[
+  {
+    "name": "puzzleImage",
+    "label": "Puzzle de Imagem",
+    "description": "Imagem a partir da qual as peças deverão ser cortadas.",
+    "type": "library",
+    "options": [
+      "H5P.Image 1.1"
+    ]
+  },
+  {
+    "name": "tilesHorizontal",
+    "label": "Número de peças, na horizontal",
+    "description": "Definição do número de peças que o puzzle deve ter, horizontalmente.",
+    "type": "number",
+    "min": 2,
+    "default": 4
+  },
+  {
+    "name": "tilesVertical",
+    "label": "Número de peças, na vertical",
+    "description": "Definição do número de peças que o puzzle deve ter, verticalmente.",
+    "type": "number",
+    "min": 2,
+    "default": 3
+  },
+  {
+    "name": "sound",
+    "type": "group",
+    "label": "Definições de som",
+    "importance": "low",
+    "description": "Estas opções permitem definir algumas opções quanto a sons a usar no puzzle.",
+    "fields": [
+      {
+        "name": "puzzleStarted",
+        "type": "audio",
+        "label": "Início do Puzzle",
+        "description": "Som a usar quando o puzzle é iniciado.",
+        "importance": "low",
+        "optional": true
+      },
+      {
+        "name": "puzzleTilePickUp",
+        "type": "audio",
+        "label": "Peça Selecionada",
+        "description": "Som a usar quando a peça do puzzle é selecionada.",
+        "importance": "low",
+        "optional": true
+      },
+      {
+        "name": "puzzleTileIncorrect",
+        "type": "audio",
+        "label": "Colocação da peça do puzzle (incorreta)",
+        "description": "Som a usar quando a peça do puzzle é colocada num local incorreto.",
+        "importance": "low",
+        "optional": true
+      },
+      {
+        "name": "puzzleTileCorrect",
+        "type": "audio",
+        "label": "Colocação correta da peça do puzzle",
+        "description": "Som a usar quando a peça do puzzle é colocada no local correto.",
+        "importance": "low",
+        "optional": true
+      },
+      {
+        "name": "puzzleCompleted",
+        "type": "audio",
+        "label": "Puzzle finalizado",
+        "description": "Som a usar quando o puzzle é finalizado.",
+        "importance": "low",
+        "optional": true
+      }
+    ]
+  },
+  {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Configurações de comportamento",
+    "importance": "low",
+    "description": "Estas opções permitem configurar o comportamento da atividade.",
+    "fields": [
+      {
+        "name": "showBackground",
+        "label": "Mostrar fundo ténue",
+        "description": "Mostra uma versão ténue da imagem, como fundo, de forma a indicar onde a peça do puzzle deve ser colocada.",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true
+      },
+      {
+        "name": "showPuzzleOutlines",
+        "label": "Mostrar contornos",
+        "description": "Mostra os contornos das peças, para indicar onde estas devem ser colocadas.",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true
+      },
+      {
+        "name": "sortingSpace",
+        "label": "Espaço para as peças",
+        "description": "Definição, em percentagem, do espaço junto ao puzzle para colocar as peças do mesmo.",
+        "type": "number",
+        "importance": "low",
+        "default": 50,
+        "min": 0,
+        "max": 75
+      },
+      {
+        "name": "useFullArea",
+        "label": "Utilizar toda a àrea",
+        "description": "Definição se as peças devem, inicialmente, ocupar toda a àrea, inclusivê a àrea onde devem ser colocadas.",
+        "type": "boolean",
+        "importance": "low",
+        "default": false,
+        "optional": true
+      },
+      {
+        "name": "enableComplete",
+        "label": "Possibilita o botão de \"Finalizar\" o puzzle",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true
+      },
+      {
+        "name": "enableRetry",
+        "label": "Possibilita o botão de \"Tentar novamente\"",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true
+      },
+      {
+        "name": "enableSolutionsButton",
+        "label": "Possibilita o botão para mostrar \"Solução\"",
+        "type": "boolean",
+        "importance": "low",
+        "default": true,
+        "optional": true,
+        "widget": "none"
+      }
+    ]
+  },
+  {
+    "name": "l10n",
+    "type": "group",
+    "common": true,
+    "label": "Interface do utilizador",
+    "importance": "low",
+    "fields": [
+      {
+        "name": "complete",
+        "type": "text",
+        "label": "Texto para o botão \"Finalizar\" o puzzle",
+        "importance": "low",
+        "default": "Finalizar"
+      },
+      {
+        "name": "tryAgain",
+        "label": "Texto para o botão \"Tentar novamente\"",
+        "type": "text",
+        "importance": "low",
+        "default": "Tentar novamente"
+      },
+      {
+        "name": "messageNoImage",
+        "label": "Texto para a mensagem \"Sem imagem\"",
+        "type": "text",
+        "importance": "low",
+        "default": "Não foi selecionada uma imagem para o puzzle."
+      }
+    ]
+  },
+  {
+    "name": "a11y",
+    "type": "group",
+    "common": true,
+    "label": "Leitor por voz",
+    "importance": "low",
+    "fields": [
+      {
+        "name": "complete",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Finalizar\"",
+        "importance": "low",
+        "default": "Finalizar o puzzle. Todas as peças serão colocadas na posição correta."
+      },
+      {
+        "name": "tryAgain",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Tentar novamente\"",
+        "type": "text",
+        "importance": "low",
+        "default": "Tentar de novo a resolução do puzzle: as peças serão de novo baralhadas."
+      },
+      {
+        "name": "buttonFullscreenEnter",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Maximizar\"",
+        "importance": "low",
+        "default": "Maximizar"
+      },
+      {
+        "name": "buttonFullscreenExit",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Sair do Modo ecrâ maximizado\"",
+        "importance": "low",
+        "default": "Sair do Modo ecrâ maximizado"
+      },
+      {
+        "name": "buttonAudioMute",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Desligar Áudio\"",
+        "importance": "low",
+        "default": "Desligar Áudio"
+      },
+      {
+        "name": "buttonAudioUnmute",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Ligar Áudio\"",
+        "importance": "low",
+        "default": "Ligar Áudio"
+      },
+      {
+        "name": "disabled",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade \"Desativar\"",
+        "importance": "low",
+        "default": "Desativar"
+      },
+      {
+        "name": "close",
+        "type": "text",
+        "label": "Descrição para a tecnologia de acessibilidade \"Fechar\"",
+        "importance": "low",
+        "default": "Fechar"
+      }
+    ]
+  }
+]
