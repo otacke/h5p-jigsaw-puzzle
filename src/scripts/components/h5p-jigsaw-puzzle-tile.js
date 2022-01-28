@@ -90,10 +90,10 @@ export default class JigsawPuzzleTile {
     const defs = document.createElement('defs');
     const pattern = document.createElement('pattern');
     pattern.setAttribute('id', `h5p-jigsaw-puzzle-${this.params.uuid}-pattern-${this.params.id}`);
-    pattern.setAttribute('x', '0');
-    pattern.setAttribute('y', '0');
-    pattern.setAttribute('width', '1');
-    pattern.setAttribute('height', '1');
+    pattern.setAttribute('width', this.params.size.width);
+    pattern.setAttribute('height', this.params.size.height);
+    pattern.setAttribute('x', -((this.params.gridPosition.x * this.params.baseWidth * this.scale - Math.sign(this.params.gridPosition.x) * this.knob / 2) / this.width));
+    pattern.setAttribute('y', -((this.params.gridPosition.y * this.params.baseHeight * this.scale - Math.sign(this.params.gridPosition.y) * this.knob / 2) / this.height));
     const image = document.createElement('image');
     image.setAttribute('width', params.image.naturalWidth);
     image.setAttribute('height', params.image.naturalHeight);
@@ -128,7 +128,8 @@ export default class JigsawPuzzleTile {
         gridPosition: {
           x: this.params.gridPosition.x,
           y: this.params.gridPosition.y
-        }
+        },
+        className: `border-${side}`
       });
 
       svg.appendChild(this.pathBorders[side]);
@@ -144,6 +145,9 @@ export default class JigsawPuzzleTile {
    */
   buildPathDOM(params = {}) {
     const pathDOM = document.createElement('path');
+    if (params.className) {
+      pathDOM.classList.add(params.className);
+    }
     pathDOM.setAttribute('fill-opacity', '0');
     pathDOM.setAttribute('stroke', params.color);
     pathDOM.setAttribute('stroke-width', params.stroke);
@@ -222,6 +226,7 @@ export default class JigsawPuzzleTile {
    */
   updateParams(params) {
     this.params = Util.extend(this.params, params);
+    this.repaintSVG(); // Might flicker
   }
 
   /**
@@ -333,6 +338,23 @@ export default class JigsawPuzzleTile {
   }
 
   /**
+   * Set tile borders.
+   * @param {object} position Key-value pair for position and boolean.
+   */
+  setBorders(positions) {
+    for (let name in positions) {
+      if (typeof positions[name] !== 'boolean') {
+        return;
+      }
+
+      const border = this.tile.querySelector(`.border-${name}`);
+      if (border) {
+        border.setAttribute('stroke-opacity', positions[name] ? '1' : '0');
+      }
+    }
+  }
+
+  /**
    * Set tile done.
    * @param {boolean} [done=true] Done state.
    */
@@ -414,8 +436,6 @@ export default class JigsawPuzzleTile {
    * Repaint the svg content.
    */
   repaintSVG() {
-    this.tile.innerHTML = '';
-
     const svg = this.buildSVG({
       id: this.params.id,
       gridPosition: this.params.gridPosition,
