@@ -18,6 +18,11 @@
         border: $border-width-normal solid $color-grey-0-10;
         box-shadow: $box-shadow-normal;
         width: 100%;
+
+        .h5p-jigsaw-puzzle-background-image {
+          filter: opacity(10%);
+          width: 100%;
+        }
       }
     }
 
