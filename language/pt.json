@@ -59,13 +59,13 @@
           "description": "Define se as peças devem ocupar, inicialmente, toda a àrea, inclusivê a àrea onde devem ser colocadas."
         },
         {
-          "label": "Possibilita o botão de \"Finalizar\" o puzzle",
+          "label": "Possibilita o botão de \"Finalizar\" o puzzle"
         },
         {
-          "label": "Possibilita o botão de \"Tentar novamente\"",
+          "label": "Possibilita o botão de \"Tentar novamente\""
         },
         {
-          "label": "Possibilita o botão para mostrar \"Solução\"",
+          "label": "Possibilita o botão para mostrar \"Solução\""
         }
       ]
     },
