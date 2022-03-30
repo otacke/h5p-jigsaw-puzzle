@@ -40,7 +40,7 @@
         },
         {
             "label": "Configurações comportamentais",
-            "description": "Estas opções permitirão controlar como a tarefa se comporta.",
+            "description": "Estas opções lhe permitirão controlar como a tarefa se comporta.",
             "fields": [
                 {
                     "label": "Mostrar um fundo opaco",
