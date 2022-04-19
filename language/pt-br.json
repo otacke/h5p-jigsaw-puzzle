@@ -70,7 +70,7 @@
             ]
         },
         {
-            "label": "Interface do usuário",
+            "label": "Interface de usuário",
             "fields": [
                 {
                     "label": "Texto para o botão \"Completar\"",
