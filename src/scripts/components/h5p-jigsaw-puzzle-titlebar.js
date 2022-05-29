@@ -38,6 +38,8 @@ export default class JiggsawPuzzleTitlebar {
       }
     }, callbacks);
 
+    this.numberVisibleButtons = 0;
+
     this.titleBar = document.createElement('div');
     this.titleBar.classList.add('h5p-jigsaw-puzzle-title-bar');
 
@@ -105,6 +107,11 @@ export default class JiggsawPuzzleTitlebar {
    */
   showFullscreenButton() {
     this.buttonFullscreen.show();
+    this.numberVisibleButtons++;
+
+    if (!this.visible) {
+      this.show();
+    }
   }
 
   /**
@@ -112,6 +119,11 @@ export default class JiggsawPuzzleTitlebar {
    */
   showAudioButton() {
     this.buttonAudio.show();
+    this.numberVisibleButtons++;
+
+    if (!this.visible) {
+      this.show();
+    }
   }
 
   /**
@@ -186,5 +198,29 @@ export default class JiggsawPuzzleTitlebar {
     if (typeof state === 'boolean') {
       this.buttonAudio.toggle(state);
     }
+  }
+
+  /**
+   * Determine whether titlebar has visible buttons.
+   * @return {boolean} True, if titltbar has visible buttons, else false.
+   */
+  hasVisibleButtons() {
+    return this.numberVisibleButtons > 0;
+  }
+
+  /**
+   * Show titlebar.
+   */
+  show() {
+    this.titleBar.classList.remove('display-none');
+    this.visible = true;
+  }
+
+  /**
+   * Hide titlebar.
+   */
+  hide() {
+    this.titleBar.classList.add('display-none');
+    this.false = true;
   }
 }

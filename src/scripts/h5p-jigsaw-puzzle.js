@@ -437,21 +437,27 @@ export default class JigsawPuzzle extends H5P.Question {
    */
   handleDOMInitialized() {
     // Add fullscreen button on first call after H5P.Question has created the DOM
-    this.container = Util.closestParent(this.content.getDOM(), '.h5p-container.h5p-jigsaw-puzzle');
+    this.container = Util.closestParent(this.content.getDOM(), '.h5p-jigsaw-puzzle');
 
     if (this.container) {
       this.content.setH5PQuestionElements(this.container);
-      this.content.enableFullscreenButton();
 
-      this.on('enterFullScreen', () => {
-        setTimeout(() => { // Needs time to get into fullscreen for window.innerHeight
-          this.content.toggleFullscreen(true);
-        }, 200);
-      });
+      if (this.isRoot() && H5P.fullscreenSupported) {
+        this.content.enableFullscreenButton();
 
-      this.on('exitFullScreen', () => {
-        this.content.toggleFullscreen(false);
-      });
+        this.on('enterFullScreen', () => {
+          setTimeout(() => { // Needs time to get into fullscreen for window.innerHeight
+            this.content.toggleFullscreen(true);
+          }, 200);
+        });
+
+        this.on('exitFullScreen', () => {
+          this.content.toggleFullscreen(false);
+        });
+      }
+      else {
+        this.content.updateTitlebarVisibility();
+      }
 
       // H5P.Question doesn't allow us to access these directly :-/
       this.buttons = {};

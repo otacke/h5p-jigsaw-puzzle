@@ -41,6 +41,7 @@ export default class JigsawPuzzleButton {
 
     this.active = this.params.active;
     this.disabled = this.params.disabled;
+    this.visible = !this.params.hidden;
 
     // Sanitize callbacks
     this.callbacks = Util.extend({
@@ -104,6 +105,8 @@ export default class JigsawPuzzleButton {
    */
   show() {
     this.button.classList.remove('h5p-jigsaw-puzzle-display-none');
+
+    this.visible = true;
   }
 
   /**
@@ -111,6 +114,8 @@ export default class JigsawPuzzleButton {
    */
   hide() {
     this.button.classList.add('h5p-jigsaw-puzzle-display-none');
+
+    this.visible = false;
   }
 
   /**
@@ -214,5 +219,9 @@ export default class JigsawPuzzleButton {
    */
   isDisabled() {
     return this.disabled;
+  }
+
+  isVisible() {
+
   }
 }

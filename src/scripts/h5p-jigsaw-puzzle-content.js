@@ -1066,6 +1066,15 @@ export default class JigsawPuzzleContent {
       });
     }, 500);
   }
+
+  /**
+   * Update titlebar visibility.
+   */
+  updateTitlebarVisibility() {
+    if (!this.titlebar.hasVisibleButtons()) {
+      this.titlebar.hide();
+    }
+  }
 }
 
 /** @constant {number} Slack factor for snapping as percentage of tile size */

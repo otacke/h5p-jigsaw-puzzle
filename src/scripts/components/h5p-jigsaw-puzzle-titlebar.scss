@@ -14,4 +14,8 @@
   .h5p-jigsaw-puzzle-button-fullscreen {
     flex-grow: 0
   }
+
+  &.display-none {
+    display: none;
+  }
 }
