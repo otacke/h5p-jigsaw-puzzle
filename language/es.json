@@ -39,7 +39,7 @@
             "description": "Estas opciones le permitirán configurar opciones relacionadas con sonido."
         },
         {
-            "label": "Configuraciones del comportamiento",
+            "label": "Configuración del comportamiento",
             "fields": [
                 {
                     "label": "Mostrar fondo pálido",
@@ -67,7 +67,7 @@
                     "label": "Habilitar botón \"Solución\""
                 }
             ],
-            "description": "Estas opciones le permitirán controlar como se comporta el trabajo."
+            "description": "Estas opciones te permitirán controlar como se comporta la tarea."
         },
         {
             "label": "Interfaz del usuario",
