@@ -5,63 +5,63 @@
             "description": "Imagen de donde se cortarán las piezas."
         },
         {
-            "label": "Piezas horizontalmente",
+            "label": "Piezas horizontales",
             "description": "Configurar cuantas piezas debería tener horizontalmente el rompecabezas."
         },
         {
-            "label": "Piezas verticalmente",
+            "label": "Piezas verticales",
             "description": "Configurar cuantas piezas debería tener verticalmente el rompecabezas."
         },
         {
             "fields": [
                 {
                     "label": "Comenzar rompecabezas",
-                    "description": "Sonido a reproducir cuando el rompecabezas es comenzado."
+                    "description": "Sonido a reproducir cuando se inicia el rompecabezas."
                 },
                 {
                     "label": "Levantar pieza del rompecabezas",
-                    "description": "Sonido a reproducir cuando una pieza del rompecabezas es levantada."
+                    "description": "Sonido a reproducir cuando se levanta una pieza del rompecabezas."
                 },
                 {
-                    "label": "Colocar (incorrectamente) pieza del rompecabezas",
-                    "description": "Sonido a reproducir cuando una pieza del rompecabezas es colocada (en un punto incorrecto)."
+                    "label": "Colocar (incorrectamente) una pieza del rompecabezas",
+                    "description": "Sonido a reproducir cuando se coloca una pieza del rompecabezas (en un punto incorrecto)."
                 },
                 {
                     "label": "Colocar correctamente pieza del rompecabezas",
-                    "description": "Sonido a reproducir cuando una pieza del rompecabezas es colocada en el punto correcto."
+                    "description": "Sonido a reproducir cuando una pieza del rompecabezas se coloca en el punto correcto."
                 },
                 {
-                    "description": "Sonido a reproducir cuando un rompecabezas es completado.",
+                    "description": "Sonido a reproducir cuando se completa un rompecabezas.",
                     "label": "Completar rompecabezas"
                 }
             ],
-            "label": "Configuraciones de sonido",
+            "label": "Ajustes de sonido",
             "description": "Estas opciones le permitirán configurar opciones relacionadas con sonido."
         },
         {
             "label": "Configuración del comportamiento",
             "fields": [
                 {
-                    "label": "Mostrar fondo pálido",
-                    "description": "Mostrar una versión pálida de la imagen en el fondo para indicar donde necesita ir una pieza del rompecabezas."
+                    "label": "Mostrar fondo tenue",
+                    "description": "Mostrar una versión tenue de la imagen de fondo para indicar donde necesita ir una pieza del rompecabezas."
                 },
                 {
                     "label": "Mostrar siluetas del rompecabezas",
                     "description": "Mostrar siluetas del rompecabezas para indicar donde necesita ir una pieza del rompecabezas."
                 },
                 {
-                    "description": "Configurar cuanto espacio en porcentaje debería estar anexo junto al rompecabezas para ordenar las piezas.",
+                    "description": "Configurar cuanto espacio en porcentaje debería estar disponible junto al rompecabezas para ordenar las piezas.",
                     "label": "Espacio para ordenar"
                 },
                 {
                     "label": "Usar el área completa",
-                    "description": "Configurar si es que inicialmente las piezas deberían cubrir el área completa incluyendo el área donde necesitan ser colocadas."
+                    "description": "Configurar si inicialmente las piezas deberían cubrir el área completa incluyendo el área donde necesitan colocarse."
                 },
                 {
                     "label": "Habilitar botón \"Completar\""
                 },
                 {
-                    "label": "Habilitar botón \"Reintentar\""
+                    "label": "Habilitar botón \"Intentar de nuevo\""
                 },
                 {
                     "label": "Habilitar botón \"Solución\""
@@ -70,55 +70,55 @@
             "description": "Estas opciones te permitirán controlar como se comporta la tarea."
         },
         {
-            "label": "Interfaz del usuario",
+            "label": "Interfaz de usuario",
             "fields": [
                 {
-                    "label": "Texto para botón \"Completar\"",
+                    "label": "Texto para el botón \"Completar\"",
                     "default": "Completar"
                 },
                 {
-                    "label": "Texto para botón \"Reintentar\"",
-                    "default": "Reintentar"
+                    "label": "Texto para el botón \"Intentar de nuevo\"",
+                    "default": "Intentar de nuevo"
                 },
                 {
-                    "label": "Texto para mensaje de \"Sin imagen\"",
-                    "default": "No había imagen dada para este rompecabezas."
+                    "label": "Texto para mensaje de \"No hay imagen\"",
+                    "default": "No se ha proporcionado una imagen para este rompecabezas."
                 }
             ]
         },
         {
-            "label": "Lector de texto en voz alta",
+            "label": "Lector de pantalla",
             "fields": [
                 {
-                    "label": "Descripción de tecnología asistiva para botón \"Completar\"",
-                    "default": "Completar el rompecabezas. Todas las piezas serán puestas en su posición correcta."
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Completar\"",
+                    "default": "Completar el rompecabezas. Todas las piezas se colocarán en su posición correcta."
                 },
                 {
-                    "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
-                    "default": "Reintentar el rompecabezas. Todas las piezas serán barajeadas en el lienzo."
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Intentar de nuevo\"",
+                    "default": "Vuelve a intentar el rompecabezas. Todas las fichas del rompecabezas se barajarán en el lienzo."
                 },
                 {
-                    "label": "Descripción de tecnología asistiva para \"Botón pasar a pantalla completa\"",
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Pasar a pantalla completa\"",
                     "default": "Entrar al modo de pantalla completa"
                 },
                 {
                     "default": "Salir del modo de pantalla completa",
-                    "label": "Descripción de tecnología asistiva para \"Botón para salir de pantalla completa\""
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Salir de pantalla completa\""
                 },
                 {
-                    "label": "Descripción de tecnología asistiva para botón \"Enmudecer\"",
-                    "default": "Enmudecer audio"
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Silenciar\"",
+                    "default": "Silenciar el audio"
                 },
                 {
-                    "default": "Habilitar audio",
-                    "label": "Descripción de tecnología asistiva para botón \"Habilitar audio\""
+                    "default": "Activar audio",
+                    "label": "Descripción para las tecnologías de asistencia del botón \"Activar audio\""
                 },
                 {
                     "default": "Deshabilitado",
-                    "label": "Descripción de tecnología asistiva para \"Deshabilitado\""
+                    "label": "Descripción para las tecnologías de asistencia de \"Deshabilitado\""
                 },
                 {
-                    "label": "Descripción de tecnología asistiva para \"Cerrar\"",
+                    "label": "Descripción para las tecnologías de asistencia de \"Cerrar\"",
                     "default": "Cerrar"
                 }
             ]
