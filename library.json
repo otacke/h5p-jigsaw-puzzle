@@ -3,7 +3,7 @@
   "description": "H5P content type for jigsaw puzzle games",
   "majorVersion": 0,
   "minorVersion": 4,
-  "patchVersion": 6,
+  "patchVersion": 7,
   "runnable": 1,
   "author": "KidsLoop, Oliver Tacke",
   "license": "MIT",
