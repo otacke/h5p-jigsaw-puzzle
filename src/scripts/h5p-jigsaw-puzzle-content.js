@@ -932,7 +932,8 @@ export default class JigsawPuzzleContent {
    * @param {Event} event Event.
    */
   handleButtonAudioClicked(event) {
-    this.isAudioEnabled = [...event?.currentTarget.classList].indexOf('h5p-jigsaw-puzzle-button-active') !== -1;
+    const classList = event?.currentTarget.classList || [];
+    this.isAudioEnabled = [...classList].indexOf('h5p-jigsaw-puzzle-button-active') !== -1;
   }
 
   /**
