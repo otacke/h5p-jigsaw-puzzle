@@ -38,6 +38,8 @@ export default class JigsawPuzzleContent {
     // Puzzle tiles, instance + position
     this.tiles = [];
 
+    this.tilesCreated = 0;
+
     // Original image size
     this.originalSize = null;
 
@@ -453,6 +455,7 @@ export default class JigsawPuzzleContent {
       });
 
       this.isAnswerGiven = false;
+      this.tilesCreated = 0;
 
       this.startAudio('puzzleStarted');
     }, 0);
@@ -963,9 +966,10 @@ export default class JigsawPuzzleContent {
     }
 
     this.puzzleArea.appendChild(tile.getDOM());
+    this.tilesCreated++;
 
     // All tiles created?
-    if (tile.getId() + 1 === this.params.size.width * this.params.size.height) {
+    if (this.tilesCreated === this.params.size.width * this.params.size.height) {
       if (this.params.showPuzzleOutlines) {
         // Compute background frame color from dropzone border color
         let rgba = window
@@ -1004,12 +1008,13 @@ export default class JigsawPuzzleContent {
 
               return clone;
             });
-
-          this.handleResized();
-
-          this.handleAllTilesCreated();
         }, 0); // Make sure original tiles have been rendered
       }
+
+      setTimeout(() => {
+        this.handleResized();
+        this.handleAllTilesCreated();
+      }, 0);
     }
   }
 
