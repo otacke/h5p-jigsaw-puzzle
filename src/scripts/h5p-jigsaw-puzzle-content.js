@@ -937,6 +937,10 @@ export default class JigsawPuzzleContent {
   handleButtonAudioClicked(event) {
     const classList = event?.currentTarget.classList || [];
     this.isAudioEnabled = [...classList].indexOf('h5p-jigsaw-puzzle-button-active') !== -1;
+
+    if (!this.isAudioEnabled) {
+      this.stopAudios();
+    }
   }
 
   /**
