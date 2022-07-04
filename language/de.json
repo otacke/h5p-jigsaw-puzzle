@@ -51,14 +51,14 @@
           "description": "Zeigt Puzzleumrisse an, um darauf hinzuweisen, wo ein Teil hingehört."
         },
         {
-          "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at.",
+          "label": "Position des Sortierplatzes",
+          "description": "Legt fest, wo der Sortierplatz positioniert sein soll.",
           "options": [
             {
-              "label": "Puzzle next to sorting space"
+              "label": "Puzzle neben dem Sortierplatz"
             },
             {
-              "label": "Puzzle above sorting space"
+              "label": "Puzzle über dem Sortierplatz"
             }
           ]
         },
@@ -68,7 +68,7 @@
         },
         {
           "label": "Sorting space",
-          "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
+          "description": "Stellt ein, wie viel Platz in Prozent relativ zum Puzzle darunter zum Sortieren der Kacheln hinzugefügt werden soll."
         },
         {
           "label": "Volle Fläche nutzen",
