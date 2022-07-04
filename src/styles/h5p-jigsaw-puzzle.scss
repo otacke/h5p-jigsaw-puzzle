@@ -10,7 +10,14 @@
 
     .h5p-jigsaw-puzzle-puzzle-area {
       display: flex;
-      flex-direction: row;
+
+      &:not(.h5p-jigsaw-puzzle-puzzle-direction-column) {
+        flex-direction: row;
+      }
+
+      &.h5p-jigsaw-puzzle-puzzle-direction-column {
+        flex-direction: column;
+      }
 
       .h5p-jigsaw-puzzle-tile-container {
         background-color: white;

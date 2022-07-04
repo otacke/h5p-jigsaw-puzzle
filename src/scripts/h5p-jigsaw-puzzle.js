@@ -27,7 +27,9 @@ export default class JigsawPuzzle extends H5P.Question {
       tilesHorizontal: 4,
       tilesVertical: 3,
       behaviour: {
+        sortingSpacePosition: 'row',
         sortingSpace: 50,
+        sortingSpaceColumn: 100,
         useFullArea: false,
         enableComplete: true,
         enableSolutionsButton: true,
@@ -97,7 +99,9 @@ export default class JigsawPuzzle extends H5P.Question {
           width: this.params.tilesHorizontal,
           height: this.params.tilesVertical
         },
+        sortingSpacePosition: this.params.behaviour.sortingSpacePosition,
         sortingSpace: this.params.behaviour.sortingSpace,
+        sortingSpaceColumn: this.params.behaviour.sortingSpaceColumn,
         sound: this.params.sound || {},
         stroke: Math.max(window.innerWidth / 750, 1.75),
         tileBorderColor: 'rgba(88, 88, 88, 0.5)',

@@ -51,8 +51,24 @@
           "description": "Show puzzle outlines to indicate where a puzzle tile needs to go."
         },
         {
+          "label": "Sorting space position",
+          "description": "Set where the sorting space should be positioned at.",
+          "options": [
+            {
+              "label": "Puzzle next to sorting space"
+            },
+            {
+              "label": "Puzzle above sorting space"
+            }
+          ]
+        },
+        {
           "label": "Sorting space",
           "description": "Set how much space in percent should be attached next to the jigsaw puzzle for sorting the tiles."
+        },
+        {
+          "label": "Sorting space",
+          "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
           "label": "Use full area",

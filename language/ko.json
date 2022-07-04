@@ -51,8 +51,24 @@
           "description": "그림퍼즐 외곽선을 통해 그림퍼즐 조각의 위치를 보여주기"
         },
         {
+          "label": "Sorting space position",
+          "description": "Set where the sorting space should be positioned at.",
+          "options": [
+            {
+              "label": "Puzzle next to sorting space"
+            },
+            {
+              "label": "Puzzle above sorting space"
+            }
+          ]
+        },
+        {
           "label": "공간 정렬",
           "description": "그림퍼즐 조각을 정렬하기 위해 그림 퍼즐 조각 옆에 붙여야 하는 공간의 비율(%)을 설정합니다."
+        },
+        {
+          "label": "Sorting space",
+          "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
           "label": "전체 영역 사용",

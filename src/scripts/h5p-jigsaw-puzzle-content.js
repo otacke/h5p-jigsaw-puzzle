@@ -13,7 +13,9 @@ export default class JigsawPuzzleContent {
    * @param {object} params.size Number of tiles (width x height).
    * @param {number} params.size.width Number of tiles horizontally.
    * @param {number} params.size.height Number of tiles vertically.
+   * @param {string} params.sortingSpacePosition Either `row` or `column`.
    * @param {number} params.sortingSpace Percentage of white space for sorting.
+   * @param {number} params.sortingSpaceColumn Percentage of white space for sorting.
    * @param {object} params.previousState Previous state.
    * @param {number} params.stroke Stroke width.
    * @param {object} callbacks Callbacks.
@@ -137,6 +139,10 @@ export default class JigsawPuzzleContent {
     // Puzzle area
     this.puzzleArea = document.createElement('div');
     this.puzzleArea.classList.add('h5p-jigsaw-puzzle-puzzle-area');
+    if (this.params.sortingSpacePosition === 'column') {
+      this.puzzleArea.classList.add('h5p-jigsaw-puzzle-puzzle-direction-column');
+    }
+
     this.content.appendChild(this.puzzleArea);
 
     // Area where puzzle tiles need to be put
@@ -149,10 +155,14 @@ export default class JigsawPuzzleContent {
     });
 
     // Optional sorting area for better overview
-    const sortingArea = document.createElement('div');
-    sortingArea.classList.add('h5p-jigsaw-puzzle-sorting-area');
-    sortingArea.style.width = `${(100 * this.params.sortingSpace) / (100 - this.params.sortingSpace)}%`;
-    this.puzzleArea.appendChild(sortingArea);
+    this.sortingArea = document.createElement('div');
+    this.sortingArea.classList.add('h5p-jigsaw-puzzle-sorting-area');
+
+    if (this.params.sortingSpacePosition === 'row') {
+      this.sortingArea.style.width = `${(100 * this.params.sortingSpace) / (100 - this.params.sortingSpace)}%`;
+    }
+
+    this.puzzleArea.appendChild(this.sortingArea);
   }
 
   /**
@@ -491,18 +501,41 @@ export default class JigsawPuzzleContent {
     }, {width: 0, height: 0});
 
     // Check what arey should be used to arrange tiles on
-    const useFullArea = params.useFullArea || (this.puzzleArea.offsetWidth * this.params.sortingSpace / 100) < maxTileSize.width;
+    const useFullArea = params.useFullArea ||
+      this.sortingArea.offsetWidth < maxTileSize.width ||
+      this.sortingArea.offsetHeight < maxTileSize.height;
 
     // Compute offset
-    const offsetLeft = (useFullArea) ?
-      this.puzzleArea.offsetLeft + 0 :
-      this.puzzleArea.offsetLeft + this.puzzleArea.offsetWidth * (1 - this.params.sortingSpace / 100);
+    const offset = {
+      left: this.puzzleArea.offsetLeft,
+      top: this.puzzleArea.offsetTop
+    };
+
+    if (!useFullArea) {
+      offset.left += (this.params.sortingSpacePosition === 'column') ?
+        0 :
+        this.puzzleDropzone.offsetWidth;
+
+      offset.top += (this.params.sortingSpacePosition === 'column') ?
+        this.puzzleDropzone.offsetHeight :
+        0;
+    }
 
     // Compute maximum size of area
-    const maxSize = {
-      width: (useFullArea) ? this.puzzleArea.offsetWidth - maxTileSize.width : this.puzzleArea.offsetWidth * this.params.sortingSpace / 100 - maxTileSize.width,
-      height: this.puzzleArea.offsetHeight - maxTileSize.height
+    const maxPos = {
+      x: this.sortingArea.offsetWidth - maxTileSize.width,
+      y: this.sortingArea.offsetHeight - maxTileSize.height
     };
+
+    if (useFullArea) {
+      maxPos.x += (this.params.sortingSpacePosition === 'column') ?
+        0 :
+        this.puzzleDropzone.offsetWidth;
+
+      maxPos.y += (this.params.sortingSpacePosition === 'column') ?
+        this.puzzleDropzone.offsetHeight :
+        0;
+    }
 
     tilesToRandomize.forEach(tile => {
       if (tile === null) {
@@ -515,8 +548,8 @@ export default class JigsawPuzzleContent {
       let y = 0;
 
       // Random position
-      x = offsetLeft + Math.random() * maxSize.width;
-      y = this.puzzleArea.offsetTop + Math.random() * maxSize.height;
+      x = offset.left + Math.random() * maxPos.x;
+      y = offset.top + Math.random() * maxPos.y;
 
       this.setTilePosition({
         tile: currentTile,
@@ -819,6 +852,14 @@ export default class JigsawPuzzleContent {
         this.puzzleDropzone.style.height = `${regularSize.height}px`;
         this.puzzleDropzone.style.width = '';
         this.puzzleDropzone.style.flexShrink = '';
+      }
+
+      // Dynamically set sorting space height if displayed below puzzle
+      if (this.params.sortingSpacePosition === 'column') {
+        const sortingSpaceHeight = this.params.sortingSpaceColumn / 100 *
+          parseFloat(this.puzzleDropzone.style.height);
+
+        this.sortingArea.style.height = `${sortingSpaceHeight}px`;
       }
 
       this.tiles.forEach((tile, index) => {
