@@ -1,7 +1,7 @@
 {
     "semantics": [
         {
-            "label": "Puzzle image",
+            "label": "పజిల్ చిత్రం",
             "description": "Image that the tiles should be cut from."
         },
         {
