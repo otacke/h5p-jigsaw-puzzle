@@ -67,15 +67,15 @@
           "description": "Хавтангуудыг ангилах эвлүүлдэг тоглоомын хажууд хэдэн хувийн зайтай байх ёстойг тохируулна уу."
         },
         {
-          "label": "Sorting space",
+          "label": "Орон зайг эрэмбэлэх",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
-          "label": "Use full area",
+          "label": "Бүтэн талбайг ашиглах",
           "description": "Set if initially the tiles should cover the complete area including the area where they need to be dropped."
-        },        
+        },
         {
-          "label": "Орон зайг эрэмбэлэх"
+          "label": "\"Бүрэн дуусгах\" товчийг идэвхжүүлнэ үү"
         },
         {
           "label": "Бүтэн талбайг ашиглах"
