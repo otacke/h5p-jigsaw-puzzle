@@ -2,27 +2,27 @@
   "semantics": [
     {
       "label": "పజిల్ చిత్రం",
-      "description": "Image that the tiles should be cut from."
+      "description": "టైల్స్‌ను కత్తిరించాల్సిన చిత్రం."
     },
     {
-      "description": "Set how many puzzle tiles the jigsaw puzzle should have horizontally.",
-      "label": "Tiles horizontally"
+      "description": "జిగ్సా పజిల్‌కి క్షితిజ సమాంతరంగా ఎన్ని పజిల్ టైల్స్ ఉండాలో సెట్ చేయండి.",
+      "label": "టైల్స్ అడ్డంగా"
     },
     {
-      "label": "Tiles vertically",
-      "description": "Set how many puzzle tiles the jigsaw puzzle should have vertically."
+      "label": "నిలువుగా టైల్స్",
+      "description": "జిగ్సా పజిల్‌లో నిలువుగా ఎన్ని పజిల్ టైల్స్ ఉండాలో సెట్ చేయండి."
     },
     {
-      "label": "Sound settings",
-      "description": "These options will let you set sound related options.",
+      "label": "సౌండ్ సెట్టింగ్‌లు",
+      "description": "ధ్వని సంబంధిత ఆప్షన్లను సెట్ చేయడానికి, ఈ ఆప్షన్లు అనుమతిస్తాయి.",
       "fields": [
         {
-          "label": "Start puzzle",
-          "description": "Sound to play when puzzle is started."
+          "label": "పజిల్ ప్రారంభించండి",
+          "description": "పజిల్ ప్రారంభించబడినప్పుడు ప్లే చేయడానికి ధ్వని."
         },
         {
-          "label": "Pick up puzzle tile",
-          "description": "Sound to play when a puzzle tile is picked up."
+          "label": "పజిల్ టైల్ పికప్ చేయండి",
+          "description": "పజిల్ టైల్ తీయబడినప్పుడు ప్లే చేయడానికి ధ్వని."
         },
         {
           "label": "Drop puzzle tile (incorrectly)",
