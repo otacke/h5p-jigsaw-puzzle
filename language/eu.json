@@ -51,8 +51,8 @@
           "description": "Erakutsi puzzlearen siluetak puzzle-lauza bat non joan behar den adierazteko."
         },
         {
-          "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at.",
+          "label": "Ordenatze-espazioaren posizioa",
+          "description": "Zehaztu ordenatze-espazioa non kokatu behar den.",
           "options": [
             {
               "label": "Puzzle next to sorting space"
@@ -67,7 +67,7 @@
           "description": "Zehaztu ehunekotan lauzak ordenatzeko zenbat espazio utzi beharko litzatekeen puzzlearen ondoan."
         },
         {
-          "label": "Sorting space",
+          "label": "Ordenatze-espazioa",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
