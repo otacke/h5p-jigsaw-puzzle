@@ -51,8 +51,8 @@
           "description": "Mostrar siluetas del rompecabezas para indicar donde necesita ir una pieza del rompecabezas."
         },
         {
-          "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at.",
+          "label": "Posición del espacio de clasificación",
+          "description": "Establece dónde debe colocarse el espacio de clasificación.",
           "options": [
             {
               "label": "Puzzle next to sorting space"
@@ -67,7 +67,7 @@
           "description": "Configurar cuanto espacio en porcentaje debería estar disponible junto al rompecabezas para ordenar las piezas."
         },
         {
-          "label": "Sorting space",
+          "label": "Espacio de clasificación",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
