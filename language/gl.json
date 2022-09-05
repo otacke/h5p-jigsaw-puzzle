@@ -51,8 +51,8 @@
           "description": "Amosar un esquema do crebacabezas para indicar onde ten que ir unha peza."
         },
         {
-          "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at.",
+          "label": "Posición no espazo de clasificación",
+          "description": "Establece onde debe situarse o espazo de clasificación.",
           "options": [
             {
               "label": "Puzzle next to sorting space"
@@ -67,7 +67,7 @@
           "description": "Establecer canto espazo en porcentaxe se debe engadir xunto ao crebacabezas para clasificar as pezas."
         },
         {
-          "label": "Sorting space",
+          "label": "Espazo de clasificación",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
