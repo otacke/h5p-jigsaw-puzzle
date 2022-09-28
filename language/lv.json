@@ -51,8 +51,8 @@
           "description": "Rādīt puzles kontūras, lai apzīmētu, kur ir jānovieto puzles gabaliņi."
         },
         {
-          "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at.",
+          "label": "Šķirošanas lauka novietojums",
+          "description": "Norādiet vietu, kur jāatrodas šķirošanas laukam.",
           "options": [
             {
               "label": "Puzzle next to sorting space"
@@ -67,7 +67,7 @@
           "description": "Iestatiet, cik vietas procentos puzles malā jāatvēlē gabaliņu šķirošanai."
         },
         {
-          "label": "Sorting space",
+          "label": "Sķirošanas lauks",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
