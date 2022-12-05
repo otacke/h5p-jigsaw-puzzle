@@ -25,7 +25,7 @@
           "description": "Som que será ouvido quando a peça do puzzle é selecionada."
         },
         {
-          "label": "Colocação da peça do puzzle (incorreta)",
+          "label": "Colocação incorreta da peça do puzzle",
           "description": "Som que será ouvido quando a peça do puzzle for colocada de forma incorreta."
         },
         {
@@ -33,8 +33,8 @@
           "description": "Som que será ouvido quando a peça do puzzle for colocada de forma correta."
         },
         {
-          "label": "Puzzle finalizado",
-          "description": "Som que será ouvido quando o puzzle é finalizado."
+          "label": "Puzzle completado",
+          "description": "Som que será ouvido quando o puzzle é completado."
         }
       ]
     },
@@ -63,11 +63,11 @@
           ]
         },
         {
-          "label": "Organização do espaço",
-          "description": "Definição, em percentagem, do espaço junto ao puzzle que será utilizado para organizar as peças do mesmo."
+          "label": "Utilizar a totalidade da área disponível",
+          "description": "Define se as peças devem ocupar, inicialmente, toda a área, inclusive aquela onde devem ser colocadas."
         },
         {
-          "label": "Sorting space",
+          "label": "Possibilita o botão de \"Completar\" o puzzle",
           "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
@@ -75,7 +75,7 @@
           "description": "Define se as peças devem ocupar, inicialmente, toda a àrea, inclusivê a àrea onde devem ser colocadas."
         },
         {
-          "label": "Possibilita o botão de \"Finalizar\" o puzzle"
+          "label": "Possibilita o botão para mostrar a \"Solução\""
         },
         {
           "label": "Possibilita o botão de \"Tentar novamente\""
@@ -89,8 +89,8 @@
       "label": "Interface do utilizador",
       "fields": [
         {
-          "label": "Texto para o botão \"Finalizar\" o puzzle",
-          "default": "Finalizar"
+          "label": "Texto para o botão \"Completar\" o puzzle",
+          "default": "Completar"
         },
         {
           "label": "Texto para o botão \"Tentar novamente\"",
@@ -98,7 +98,7 @@
         },
         {
           "label": "Texto para a mensagem \"Sem imagem\"",
-          "default": "Não foi selecionada uma imagem para o puzzle."
+          "default": "Não foi ainda selecionada uma imagem para o puzzle."
         }
       ]
     },
@@ -106,8 +106,8 @@
       "label": "Leitor por voz",
       "fields": [
         {
-          "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Finalizar\"",
-          "default": "Finalizar o puzzle. Todas as peças serão colocadas na posição correta."
+          "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Completar\"",
+          "default": "Completar o puzzle. Todas as peças serão colocadas na posição correta."
         },
         {
           "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Tentar novamente\"",
@@ -118,7 +118,7 @@
           "default": "Maximizar"
         },
         {
-          "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Sair do Modo ecrâ maximizado\"",
+          "label": "Descrição para a tecnologia de acessibilidade, para o botão \"Sair do Modo ecrã maximizado\"",
           "default": "Restaurar a dimensão do ecrã"
         },
         {
