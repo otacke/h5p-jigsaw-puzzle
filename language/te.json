@@ -97,13 +97,13 @@
           "default": "తిరిగి ప్రయత్నించు /రి ట్రై"
         },
         {
-          "label": "Text for \"No image\" message",
-          "default": "There was no image given for this jigsaw puzzle."
+          "label": "\"చిత్రం లేదు\" మెసేజ్ కై టెక్స్ట్",
+          "default": "ఈ జిగ్ సా పజిల్ కోసం చిత్రం ఇవ్వబడలేదు."
         }
       ]
     },
     {
-      "label": "Readspeaker",
+      "label": "రీడ్ స్పీకర్",
       "fields": [
         {
           "label": "Assistive technology description for \"Complete\" button",
