@@ -106,36 +106,36 @@
       "label": "రీడ్ స్పీకర్",
       "fields": [
         {
-          "label": "Assistive technology description for \"Complete\" button",
-          "default": "Complete the puzzle. All tiles will be put to their correct position."
+          "label": "\"పూర్తిచేయు\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "ఈ పజిల్ ను పూర్తి చేయండి. టైల్స్ అన్నీ వాటి వాటి స్థానాల్లో భర్తీ చేయబడతాయి."
         },
         {
-          "label": "Assistive technology description for \"Retry\" button",
-          "default": "Retry the puzzle. All puzzle tiles will be shuffled on the canvas."
+          "label": "\"తిరిగి ప్రయత్నించు\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "పజిల్ ను తిరిగి ప్రయత్నించు.అన్ని పజిల్ టైల్స్ కాన్వాస్‌పై షఫుల్ చేయబడతాయి."
         },
         {
-          "label": "Assistive technology description for \"Enter fullscreen button\"",
-          "default": "Enter fullscreen mode"
+          "label": "\"ఫుల్ స్క్రీన్ లోకి వెళ్ళు బటన్\" కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "ఫుల్ స్క్రీన్ మోడ్ లోకి వెళ్ళు"
         },
         {
-          "label": "Assistive technology description for \"Exit fullscreen button\"",
-          "default": "Exit fullscreen mode"
+          "label": "\"ఫుల్ స్క్రీన్ బటన్ నుంచి బయటకు రా\" కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "ఫుల్ స్క్రీన్ మోడ్ నుంచి బయటకు రా"
         },
         {
-          "label": "Assistive technology description for \"Mute\" button",
-          "default": "Mute audio"
+          "label": "\"మ్యూట్\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "మ్యూట్ ఆడియో"
         },
         {
-          "label": "Assistive technology description for \"Unmute\" button",
-          "default": "Unmute audio"
+          "label": "\"అన్ మ్యూట్\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "అన్ మ్యూట్ ఆడియో"
         },
         {
-          "label": "Assistive technology description for \"Disabled\"",
-          "default": "Disabled"
+          "label": "\"డిసేబుల్డ్\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "డిసేబుల్డ్"
         },
         {
-          "label": "Assistive technology description for \"Close\"",
-          "default": "Close"
+          "label": "\"క్లోజ్\"బటన్ కై అసిస్టివ్ టెక్నాలజీ వివరణ",
+          "default": "క్లోజ్"
         }
       ]
     }
