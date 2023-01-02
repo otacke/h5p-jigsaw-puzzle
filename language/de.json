@@ -75,7 +75,7 @@
           "description": "Legt fest, ob die Teile anfänglich den gesamten Bereich abdecken sollen, einschließlich des Bereichs, in dem sie abgelegt werden müssen."
         },
         {
-          "label": "\"Fertig stellen\"-Button aktivieren"
+          "label": "\"Fertigstellen\"-Button aktivieren"
         },
         {
           "label": "\"Wiederholen\"-Button anzeigen"
@@ -89,8 +89,8 @@
       "label": "Bedienoberfläche",
       "fields": [
         {
-          "label": "Beschriftung des \"Fertig stellen\"-Buttons",
-          "default": "Fertig stellen"
+          "label": "Beschriftung des \"Fertigstellen\"-Buttons",
+          "default": "Fertigstellen"
         },
         {
           "label": "Beschriftung des \"Wiederholen\"-Buttons",
