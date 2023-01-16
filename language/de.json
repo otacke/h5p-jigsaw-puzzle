@@ -67,7 +67,7 @@
           "description": "Stellt ein, wie viel Platz in Prozent neben dem Puzzle zum Sortieren der Kacheln hinzugefügt werden soll."
         },
         {
-          "label": "Sorting space",
+          "label": "Platz zum Sortieren",
           "description": "Stellt ein, wie viel Platz in Prozent relativ zum Puzzle darunter zum Sortieren der Kacheln hinzugefügt werden soll."
         },
         {
