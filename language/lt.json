@@ -52,24 +52,41 @@
         },
         {
           "label": "Sorting space position",
-          "description": "Set where the sorting space should be positioned at."
+          "description": "Set where the sorting space should be positioned at.",
+          "options": [
+            {
+              "label": "Puzzle next to sorting space"
+            },
+            {
+              "label": "Puzzle above sorting space"
+            }
+          ]
         },
         {
           "label": "Sorting space",
           "description": "Set how much space in percent should be attached next to the jigsaw puzzle for sorting the tiles."
         },
         {
-          "label": "Sorting space"
+          "label": "Sorting space",
+          "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
-          "label": "Use full area"
+          "label": "Use full area",
+          "description": "Set if initially the tiles should cover the complete area including the area where they need to be dropped."
         },
         {
           "label": "Enable \"Complete\" button"
+        },
+        {
+          "label": "Enable \"Retry\" button"
+        },
+        {
+          "label": "Enable \"Solution\" button"
         }
       ]
     },
     {
+      "label": "User interface",
       "fields": [
         {
           "label": "Text for \"Complete\" button",
@@ -83,8 +100,7 @@
           "label": "Text for \"No image\" message",
           "default": "There was no image given for this jigsaw puzzle."
         }
-      ],
-      "label": "User interface"
+      ]
     },
     {
       "label": "Readspeaker",

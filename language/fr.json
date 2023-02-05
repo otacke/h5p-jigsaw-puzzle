@@ -51,8 +51,24 @@
           "description": "Afficher les contours du casse-tête pour indiquer où une tuile du casse-tête doit aller."
         },
         {
+          "label": "Sorting space position",
+          "description": "Set where the sorting space should be positioned at.",
+          "options": [
+            {
+              "label": "Puzzle next to sorting space"
+            },
+            {
+              "label": "Puzzle above sorting space"
+            }
+          ]
+        },
+        {
           "label": "Espace de tri",
           "description": "Définir combien d'espace en pourcentage doit être attaché à côté du puzzle pour trier les tuiles."
+        },
+        {
+          "label": "Sorting space",
+          "description": "Set how much space in percent relative to the puzzle should be attached below to the jigsaw puzzle for sorting the tiles."
         },
         {
           "label": "Utiliser toute la zone",
