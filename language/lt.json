@@ -14,7 +14,7 @@
     },
     {
       "label": "Garso nustatymai",
-      "description": "These options will let you set sound related options.",
+      "description": "Šios parinktys leis nustatyti su garsu susijusias parinktis.",
       "fields": [
         {
           "label": "Pradėkite dėlionę",
