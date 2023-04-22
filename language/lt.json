@@ -14,7 +14,7 @@
     },
     {
       "label": "Garso nustatymai",
-      "description": "Šiose parinktyse jūs galite nustatyti garso variantus.",
+      "description": "Šiose parinktyse jūs galite nustatyti garso parinktis.",
       "fields": [
         {
           "label": "Pradėkite dėlionę",
