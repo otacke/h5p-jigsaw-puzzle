@@ -2,14 +2,16 @@
 class Util {
   /**
    * Extend an array just like JQuery's extend.
-   * @param {object} arguments Objects to be merged.
-   * @return {object} Merged objects.
+   * @returns {object} Merged objects.
    */
   static extend() {
     for (let i = 1; i < arguments.length; i++) {
       for (let key in arguments[i]) {
         if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
-          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
+          if (
+            typeof arguments[0][key] === 'object' &&
+            typeof arguments[i][key] === 'object'
+          ) {
             this.extend(arguments[0][key], arguments[i][key]);
           }
           else {
@@ -24,7 +26,7 @@ class Util {
   /**
    * Retrieve true string from HTML encoded string.
    * @param {string} input Input string.
-   * @return {string} Output string.
+   * @returns {string} Output string.
    */
   static htmlDecode(input) {
     var dparser = new DOMParser().parseFromString(input, 'text/html');
@@ -33,8 +35,8 @@ class Util {
 
   /**
    * Retrieve string without HTML tags.
-   * @param {string} input Input string.
-   * @return {string} Output string.
+   * @param {string} html Input string.
+   * @returns {string} Output string.
    */
   static stripHTML(html) {
     const div = document.createElement('div');
@@ -46,7 +48,7 @@ class Util {
    * Get closest parent node by selector.
    * @param {HTMLElement} node Node.
    * @param {string} selector CSS classname, id or tagname.
-   * @return {HTMLElement|null} Closest parent node by selector or null.
+   * @returns {HTMLElement|null} Closest parent node by selector or null.
    */
   static closestParent(node, selector) {
     if (typeof node !== 'object' || typeof selector !== 'string') {
@@ -57,13 +59,18 @@ class Util {
       return null; // no parent left
     }
 
-    if (selector.substr(0, 1) === '.') { // classnames
-      const selectors = selector.split('.').filter(selector => selector !== '');
-      if (selectors.every(selector => node.parentNode?.classList?.contains(selector))) {
+    if (selector.substring(0, 1) === '.') { // classnames
+      const selectors = selector
+        .split('.')
+        .filter((selector) => selector !== '');
+
+      if (selectors.every((selector) => {
+        return node.parentNode?.classList?.contains(selector);
+      })) {
         return node.parentNode;
       }
     }
-    else if (selector.substr(0, 1) === '#') { // id
+    else if (selector.substring(0, 1) === '#') { // id
       if (
         typeof node.parentNode.getAttribute === 'function' &&
         node.parentNode.getAttribute('id') === selector.substr(1)
@@ -81,7 +88,7 @@ class Util {
   /**
    * Shuffle array.
    * @param {object[]} array Array.
-   * @return {object[]} Shuffled array.
+   * @returns {object[]} Shuffled array.
    */
   static shuffleArray(array) {
     const newArray = [...array]; // Shallow clone

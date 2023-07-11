@@ -1,11 +1,11 @@
 import './h5p-jigsaw-puzzle-tile.scss';
 
-import Util from './../h5p-jigsaw-puzzle-util';
+import Util from '@services/util';
 
 /** Class representing a puzzle tile */
 export default class JigsawPuzzleTile {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters.
    * @param {object} callbacks Callbacks.
    * @param {function} callbacks.onTileCreated Callback for when tile is created.
@@ -61,7 +61,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Return the DOM for tile.
-   * @return {HTMLElement} DOM for this class.
+   * @returns {HTMLElement} DOM for this class.
    */
   getDOM() {
     return this.tile;
@@ -69,7 +69,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Return the outer HTML for tile.
-   * @return {string} Outer HTML for tile.
+   * @returns {string} Outer HTML for tile.
    */
   getHTML() {
     return this.tile.outerHTML;
@@ -78,7 +78,7 @@ export default class JigsawPuzzleTile {
   /**
    * Build SVG element.
    * @param {object} params Parameters.
-   * @return {HTMLElement} SVG element.
+   * @returns {HTMLElement} SVG element.
    */
   buildSVG(params = {}) {
     const svg = document.createElement('svg');
@@ -116,7 +116,7 @@ export default class JigsawPuzzleTile {
     svg.appendChild(path);
 
     // Add paths for borders
-    ['top', 'right', 'bottom', 'left'].forEach(side => {
+    ['top', 'right', 'bottom', 'left'].forEach((side) => {
       this.pathBorders[side] = this.buildPathDOM({
         stroke: params.stroke,
         color: this.params.borderColor,
@@ -141,7 +141,7 @@ export default class JigsawPuzzleTile {
   /**
    * Build DOM element for SVG path.
    * @param {object} params Parameters.
-   * @return {HTMLElement} DOM for SVG path.
+   * @returns {HTMLElement} DOM for SVG path.
    */
   buildPathDOM(params = {}) {
     const pathDOM = document.createElement('path');
@@ -170,7 +170,7 @@ export default class JigsawPuzzleTile {
   /**
    * Build SVG segment.
    * @param {object} params Parameters.
-   * @return {string} SVG path.
+   * @returns {string} SVG path.
    */
   buildPathSegment(params = {}) {
     const knob = Math.min(params.width, params.height) / 2;
@@ -206,6 +206,7 @@ export default class JigsawPuzzleTile {
    * @param {string} params.type Puzzle tile type.
    * @param {number} params.width Width.
    * @param {number} params.height Height.
+   * @returns {string} SVG path dash.
    */
   buildPathDash(params = {}) {
     const knob = Math.min(params.width, params.height) / 2;
@@ -231,7 +232,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Set CSS z-index.
-   * @param {number} [index=''] Z-index or empty to reset.
+   * @param {number} [index] Z-index or empty to reset.
    */
   setZIndex(index = '') {
     if (index !== '' && typeof index !== 'number') {
@@ -243,7 +244,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Get grid position.
-   * @return {object} Grid position.
+   * @returns {object} Grid position.
    */
   getGridPosition() {
     return {
@@ -254,7 +255,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Get tile id.
-   * @return {number} Tile id.
+   * @returns {number} Tile id.
    */
   getId() {
     return this.params.id;
@@ -282,7 +283,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Get size.
-   * @return {object|null} Size.
+   * @returns {object|null} Size.
    */
   getSize() {
     if (!this.tile.style.width || !this.tile.style.height) {
@@ -301,7 +302,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Get position.
-   * @return {object|null} Position.
+   * @returns {object|null} Position.
    */
   getPosition() {
     if (!this.tile.style.left || !this.tile.style.top) {
@@ -339,7 +340,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Set tile borders.
-   * @param {object} position Key-value pair for position and boolean.
+   * @param {object} positions Key-value pair for position and boolean.
    */
   setBorders(positions) {
     for (let name in positions) {
@@ -356,7 +357,7 @@ export default class JigsawPuzzleTile {
 
   /**
    * Set tile done.
-   * @param {boolean} [done=true] Done state.
+   * @param {boolean} [done] Done state.
    */
   setDone(done = true) {
     this.isDone = done;
@@ -525,7 +526,6 @@ export default class JigsawPuzzleTile {
 
   /**
    * Handle tile stopped moving.
-   * @param {Event} event MouseEvent|TouchEvent.
    */
   handleTileMoveEnded() {
     // Remove listeners

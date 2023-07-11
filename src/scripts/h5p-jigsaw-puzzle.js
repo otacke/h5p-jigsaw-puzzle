@@ -1,13 +1,13 @@
 // Import required classes
-import JigsawPuzzleContent from './h5p-jigsaw-puzzle-content';
-import Util from './h5p-jigsaw-puzzle-util';
+import JigsawPuzzleContent from '@scripts/h5p-jigsaw-puzzle-content';
+import Util from '@services/util';
 
 /**
  * Class holding a full JigsawPuzzle.
  */
 export default class JigsawPuzzle extends H5P.Question {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters passed by the editor.
    * @param {number} contentId Content's id.
    * @param {object} [extras] Saved state, metadata, etc.
@@ -181,10 +181,10 @@ export default class JigsawPuzzle extends H5P.Question {
     this.addButton(
       'complete',
       this.params.l10n.complete, () => {
-        this.handleClickButtonComplete({xAPI: true});
+        this.handleClickButtonComplete({ xAPI: true });
       },
-      this.params.behaviour.enableComplete && this.previousState?.tiles?.some(done => !done),
-      {'aria-label': this.params.a11y.complete},
+      this.params.behaviour.enableComplete && this.previousState?.tiles?.some((done) => !done),
+      { 'aria-label': this.params.a11y.complete },
       {}
     );
 
@@ -194,8 +194,8 @@ export default class JigsawPuzzle extends H5P.Question {
       this.params.l10n.tryAgain, () => {
         this.handleClickButtonRetry();
       },
-      this.params.behaviour.enableRetry && (!!this.previousState?.tiles && this.previousState?.tiles?.some(done => done)),
-      {'aria-label': this.params.a11y.tryAgain},
+      this.params.behaviour.enableRetry && (!!this.previousState?.tiles && this.previousState?.tiles?.some((done) => done)),
+      { 'aria-label': this.params.a11y.tryAgain },
       {}
     );
   }
@@ -284,7 +284,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Check if result has been submitted or input has been given.
-   * @return {boolean} True, if answer was given.
+   * @returns {boolean} True, if answer was given.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   getAnswerGiven() {
@@ -293,7 +293,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get latest score.
-   * @return {number} latest score.
+   * @returns {number} latest score.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   getScore() {
@@ -302,7 +302,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get maximum possible score.
-   * @return {number} Score necessary for mastering.
+   * @returns {number} Score necessary for mastering.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   getMaxScore() {
@@ -318,7 +318,7 @@ export default class JigsawPuzzle extends H5P.Question {
       return; // not ready yet
     }
 
-    this.handleClickButtonComplete({xAPI: false});
+    this.handleClickButtonComplete({ xAPI: false });
     this.trigger('resize');
   }
 
@@ -342,7 +342,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get xAPI data.
-   * @return {object} XAPI statement.
+   * @returns {object} XAPI statement.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   getXAPIData() {
@@ -353,7 +353,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Build xAPI completed event.
-   * @return {H5P.XAPIEvent} XAPI answer event.
+   * @returns {H5P.XAPIEvent} XAPI answer event.
    */
   getXAPIAnsweredEvent() {
     const xAPIEvent = this.createXAPIEvent('answered');
@@ -367,7 +367,7 @@ export default class JigsawPuzzle extends H5P.Question {
   /**
    * Create an xAPI event for Jigsaw Puzzle.
    * @param {string} verb Short id of the verb we want to trigger.
-   * @return {H5P.XAPIEvent} Event template.
+   * @returns {H5P.XAPIEvent} Event template.
    */
   createXAPIEvent(verb) {
     const xAPIEvent = this.createXAPIEventTemplate(verb);
@@ -379,15 +379,15 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get the xAPI definition for the xAPI object.
-   * @return {object} XAPI definition.
+   * @returns {object} XAPI definition.
    */
   getxAPIDefinition() {
     let description = this.getDescription();
 
     // Build definition
     return {
-      name: {'en-US': this.getTitle()},
-      description: {'en-US': description},
+      name: { 'en-US': this.getTitle() },
+      description: { 'en-US': description },
       type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
       interactionType: 'other'
     };
@@ -395,7 +395,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Determine whether the task has been passed by the user.
-   * @return {boolean} True if user passed or task is not scored.
+   * @returns {boolean} True if user passed or task is not scored.
    */
   isPassed() {
     return this.getScore() >= this.getMaxScore();
@@ -403,7 +403,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get tasks title.
-   * @return {string} Title.
+   * @returns {string} Title.
    */
   getTitle() {
     let raw;
@@ -418,7 +418,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Get tasks description.
-   * @return {string} Description.
+   * @returns {string} Description.
    */
   getDescription() {
     return this.params.taskDescription || JigsawPuzzle.DEFAULT_DESCRIPTION;
@@ -426,7 +426,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Answer call to return the current state.
-   * @return {object} Current state.
+   * @returns {object|undefined} Current state.
    */
   getCurrentState() {
     if (!this.params?.puzzleImage?.params?.file?.path || !this.content) {
@@ -508,7 +508,7 @@ export default class JigsawPuzzle extends H5P.Question {
   /**
    * Handle puzzle completed.
    * @param {object} [params] Parameters.
-   * @param {boolean} xAPI It true. will trigger xAPI.
+   * @param {boolean} [params.xAPI] If true, will trigger xAPI.
    */
   handlePuzzleCompleted(params = {}) {
     this.hideButton('complete');
@@ -521,6 +521,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
   /**
    * Handle click on button complete.
+   * @param {object} params Parameters.
    */
   handleClickButtonComplete(params) {
     this.handleInteracted();

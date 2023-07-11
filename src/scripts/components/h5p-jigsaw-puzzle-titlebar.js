@@ -2,12 +2,12 @@ import './h5p-jigsaw-puzzle-titlebar.scss';
 
 // Import required classes
 import JiggsawPuzzleButton from './h5p-jigsaw-puzzle-button';
-import Util from './../h5p-jigsaw-puzzle-util';
+import Util from '@services/util';
 
 /** Class representing the content */
 export default class JiggsawPuzzleTitlebar {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameter from editor.
    * @param {string} params.title Title.
    * @param {string} params.dateString Date.
@@ -96,7 +96,7 @@ export default class JiggsawPuzzleTitlebar {
 
   /**
    * Return the DOM for this class.
-   * @return {HTMLElement} DOM for this class.
+   * @returns {HTMLElement} DOM for this class.
    */
   getDOM() {
     return this.titleBar;
@@ -156,7 +156,7 @@ export default class JiggsawPuzzleTitlebar {
 
   /**
    * Get audio button state.
-   * @return {boolean} True if audio button is active.
+   * @returns {boolean} True if audio button is active.
    */
   getAudioButtonState() {
     return this.buttonAudio.isActive();
@@ -202,7 +202,7 @@ export default class JiggsawPuzzleTitlebar {
 
   /**
    * Determine whether titlebar has visible buttons.
-   * @return {boolean} True, if titltbar has visible buttons, else false.
+   * @returns {boolean} True, if titltbar has visible buttons, else false.
    */
   hasVisibleButtons() {
     return this.numberVisibleButtons > 0;

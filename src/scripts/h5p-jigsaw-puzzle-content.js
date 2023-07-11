@@ -1,12 +1,12 @@
 // Import required classes
-import JigsawPuzzleTile from './components/h5p-jigsaw-puzzle-tile';
-import JigsawPuzzleTitlebar from './components/h5p-jigsaw-puzzle-titlebar';
-import Util from './h5p-jigsaw-puzzle-util';
+import JigsawPuzzleTile from '@components/h5p-jigsaw-puzzle-tile';
+import JigsawPuzzleTitlebar from '@components/h5p-jigsaw-puzzle-titlebar';
+import Util from '@services/util';
 
 /** Class representing the content */
 export default class JigsawPuzzleContent {
   /**
-   * @constructor
+   * @class
    * @param {object} params Parameters.
    * @param {H5P.Image} params.puzzleImageInstance Background image.
    * @param {string} params.uuid UUID for multiple instances in one iframe.
@@ -98,7 +98,7 @@ export default class JigsawPuzzleContent {
 
   /**
    * Return the DOM for this class.
-   * @return {HTMLElement} DOM for this class.
+   * @returns {HTMLElement} DOM for this class.
    */
   getDOM() {
     return this.content;
@@ -171,7 +171,7 @@ export default class JigsawPuzzleContent {
    * @param {number} params.x Tile grid position horizontally.
    * @param {number} params.y Tile grid position vertically.
    * @param {string} [params.format] Image format.
-   * @return {JigsawPuzzleTile} Puzzle tile.
+   * @returns {JigsawPuzzleTile} Puzzle tile.
    */
   createPuzzleTile(params) {
     const baseWidth = this.image.naturalWidth / this.params.size.width;
@@ -224,7 +224,7 @@ export default class JigsawPuzzleContent {
         baseHeight: baseHeight,
         width: tileWidth,
         height: tileHeight,
-        gridPosition: {x: params.x, y: params.y},
+        gridPosition: { x: params.x, y: params.y },
         knobSize: knobSize,
         imageSource: this.image.src,
         imageCrossOrigin: this.imageCrossOrigin,
@@ -259,7 +259,7 @@ export default class JigsawPuzzleContent {
    * @param {JigsawPuzzleTile} params.tile Puzzle tile.
    * @param {number} params.x Absolute x position.
    * @param {number} params.y Absolute y position.
-   * @param {boolean} [params.animate = false] If true, animate moving.
+   * @param {boolean} [params.animate] If true, animate moving.
    */
   setTilePosition(params = {}) {
     if (!params.tile) {
@@ -298,7 +298,7 @@ export default class JigsawPuzzleContent {
   /**
    * Get asset path.
    * @param {string} truePath HTTP path.
-   * @return {string} Path that H5P can use.
+   * @returns {string} Path that H5P can use.
    */
   getAssetPath(truePath) {
     if (truePath.indexOf('sites/default/files/h5p/development') !== -1) {
@@ -357,7 +357,7 @@ export default class JigsawPuzzleContent {
     [
       'puzzleStarted', 'puzzleTilePickUp', 'puzzleTileCorrect',
       'puzzleTileIncorrect', 'puzzleCompleted'
-    ].forEach(id => {
+    ].forEach((id) => {
       if (this.params.sound[id] && this.params.sound[id].length > 0 && this.params.sound[id][0].path) {
         H5P.SoundJS.registerSound(H5P.getPath(this.params.sound[id][0].path, this.params.contentId), id);
         this.hasAudios = true;
@@ -452,7 +452,7 @@ export default class JigsawPuzzleContent {
    */
   reset() {
     setTimeout(() => {
-      this.tiles.forEach(tile => {
+      this.tiles.forEach((tile) => {
         this.showTileBorders(tile.instance);
         tile.instance.enable();
         tile.instance.setDone(false);
@@ -476,7 +476,7 @@ export default class JigsawPuzzleContent {
    * @param {object} params Parameters.
    * @param {boolean} [params.useFullArea] If true, use full area to spread tiles.
    * @param {string} [params.layout] Spread layout, random by default.
-   * @param {boolean} [params.keepDone=true] If not true, will shuffle all tiles.
+   * @param {boolean} [params.keepDone] If not true, will shuffle all tiles.
    */
   randomizeTiles(params = {}) {
     // All tile ids in random order
@@ -489,7 +489,7 @@ export default class JigsawPuzzleContent {
 
     if (params.keepDone) {
       // Don't shuffle tiles that had already been placed correctly
-      tilesToRandomize = tilesToRandomize.map(tile => (tile.instance.isDone) ? null : tile);
+      tilesToRandomize = tilesToRandomize.map((tile) => (tile.instance.isDone) ? null : tile);
     }
 
     // Determine maximum tile size
@@ -498,7 +498,7 @@ export default class JigsawPuzzleContent {
         width: Math.max(max.width, current.instance.getSize().width),
         height: Math.max(max.height, current.instance.getSize().height)
       };
-    }, {width: 0, height: 0});
+    }, { width: 0, height: 0 });
 
     // Check what arey should be used to arrange tiles on
     const useFullArea = params.useFullArea ||
@@ -537,7 +537,7 @@ export default class JigsawPuzzleContent {
         0;
     }
 
-    tilesToRandomize.forEach(tile => {
+    tilesToRandomize.forEach((tile) => {
       if (tile === null) {
         return; // Tile at this index is done
       }
@@ -564,7 +564,7 @@ export default class JigsawPuzzleContent {
    * Move a tile to its target position.
    * @param {JigsawPuzzleTile} tileInstance Tile instance.
    * @param {object} [params] Parameters.
-   * @param {boolean} [params.animate=false] If true, animate moving.
+   * @param {boolean} [params.animate] If true, animate moving.
    */
   moveTileToTarget(tileInstance, params = {}) {
     params.animate = params.animate ?? false;
@@ -588,20 +588,20 @@ export default class JigsawPuzzleContent {
   /**
    * Move all puzzle tiles to targets and finalize them.
    * @param {JigsawPuzzleTile[]} [tiles] Tiles to move to target.
-   * @param {object} [params={}] Parameters.
-   * @param {boolean} [params.animate=true] If true, animate.
-   * @param {boolean} [params.finalize=true] If true, will finalize tiles.
+   * @param {object} [params] Parameters.
+   * @param {boolean} [params.animate] If true, animate.
+   * @param {boolean} [params.finalize] If true, will finalize tiles.
    */
   moveTilesToTarget(tiles, params = {}) {
     tiles = tiles ?
-      tiles.map(tile => (tile.instance ? tile : {instance: tile})) :
+      tiles.map((tile) => (tile.instance ? tile : { instance: tile })) :
       this.tiles;
 
     params.animate = params.animate ?? true;
     params.finalize = params.finalize ?? true;
 
-    tiles.forEach(tile => {
-      this.moveTileToTarget(tile.instance, {animate: params.animate});
+    tiles.forEach((tile) => {
+      this.moveTileToTarget(tile.instance, { animate: params.animate });
 
       if (params.finalize) {
         this.finalizeTile(tile.instance);
@@ -748,7 +748,7 @@ export default class JigsawPuzzleContent {
 
   /**
    * Check if result has been submitted or input has been given.
-   * @return {boolean} True, if answer was given.
+   * @returns {boolean} True, if answer was given.
    */
   getAnswerGiven() {
     return this.isAnswerGiven;
@@ -756,7 +756,7 @@ export default class JigsawPuzzleContent {
 
   /**
    * Get latest score.
-   * @return {number} latest score.
+   * @returns {number} latest score.
    */
   getScore() {
     return this.tiles.reduce((sum, tile) => sum + (tile.instance.isDone ? 1 : 0), 0);
@@ -764,17 +764,18 @@ export default class JigsawPuzzleContent {
 
   /**
    * Get current state
-   * @return {object} Current state.
+   * @returns {object} Current state.
    */
   getCurrentState() {
     return {
       audioButtonState: this.titlebar.getAudioButtonState(),
-      tiles: this.tiles.map(tile => tile.instance.isDone)
+      tiles: this.tiles.map((tile) => tile.instance.isDone)
     };
   }
 
   /**
    * Handle puzzle image loaded and create puzzle tiles from it.
+   * @param {string} format Desired format.
    */
   handleImageLoaded(format) {
     this.originalSize = {
@@ -887,7 +888,7 @@ export default class JigsawPuzzleContent {
   handlePuzzleTileMoveStarted(tile) {
 
     // Ghost all enabled tiles to allow comfortable positioning
-    this.tiles.forEach(tile => {
+    this.tiles.forEach((tile) => {
       tile.instance.putInBackground();
       if (!tile.instance.isDisabled) {
         tile.instance.ghost();
@@ -903,7 +904,6 @@ export default class JigsawPuzzleContent {
 
   /**
    * Handle puzzle tile being moved.
-   * @param {JigsawPuzzleTile} tile Puzzle tile.
    */
   handlePuzzleTileMoved() {
     // Could be useful for showing hints
@@ -915,7 +915,7 @@ export default class JigsawPuzzleContent {
    */
   handlePuzzleTileMoveEnded(tile) {
     // Unghost all tiles to show everything
-    this.tiles.forEach(tile => {
+    this.tiles.forEach((tile) => {
       tile.instance.unghost();
     });
 
@@ -966,8 +966,8 @@ export default class JigsawPuzzleContent {
     this.callbacks.onInteracted();
 
     // Handle completed
-    if (this.tiles.every(tile => tile.instance.isDone)) {
-      this.handlePuzzleCompleted({xAPI: true});
+    if (this.tiles.every((tile) => tile.instance.isDone)) {
+      this.handlePuzzleCompleted({ xAPI: true });
     }
   }
 
@@ -993,6 +993,7 @@ export default class JigsawPuzzleContent {
 
   /**
    * Handle puzzle completed.
+   * @param {object} params Parameters.
    */
   handlePuzzleCompleted(params) {
     this.startAudio('puzzleCompleted');
@@ -1022,7 +1023,7 @@ export default class JigsawPuzzleContent {
           .getPropertyValue('border-color')
           .replace(/[^.^\d,]/g, '')
           .split(',')
-          .map(value => parseFloat(value, 10));
+          .map((value) => parseFloat(value, 10));
 
         if (rgba.length === 4) {
           rgba[3] /= 2;
@@ -1035,7 +1036,7 @@ export default class JigsawPuzzleContent {
         setTimeout(() => {
           // Create puzzle outlines from actual puzzle tiles
           this.puzzleOutlines = this.tiles
-            .map(tile => {
+            .map((tile) => {
               const clone = tile.instance.getDOM().cloneNode(true);
               clone.setAttribute('disabled', 'disabled');
 
@@ -1047,7 +1048,7 @@ export default class JigsawPuzzleContent {
 
               // Change border colors
               const borders = clone.querySelectorAll('svg path');
-              borders.forEach(border => {
+              borders.forEach((border) => {
                 border.setAttribute('stroke', rgba);
               });
 
@@ -1067,20 +1068,22 @@ export default class JigsawPuzzleContent {
    * Handle all puzzle tiles created.
    *
    * Could be preloaded e.g. in Course Presentation where width is still 0.
+   * @param {number} [interval] Interval.
+   * @param {number} [retries] Number of retries.
    */
   handleAllTilesCreated(interval = 500, retries = Infinity) {
     if (this.puzzleArea?.offsetWidth > 0) {
       this.handleDOMVisible();
     }
     else if (retries === 0) {
-      this.tiles.forEach(tile => {
+      this.tiles.forEach((tile) => {
         tile.instance.show();
       });
 
       return; // Give up
     }
     else {
-      this.tiles.forEach(tile => {
+      this.tiles.forEach((tile) => {
         tile.instance.hide();
       });
 
@@ -1095,11 +1098,11 @@ export default class JigsawPuzzleContent {
    * Handle DOM visible.
    */
   handleDOMVisible() {
-    this.tiles.forEach(tile => {
+    this.tiles.forEach((tile) => {
       tile.instance.show();
     });
 
-    this.moveTilesToTarget(this.tiles, {animate: false, finalize: false});
+    this.moveTilesToTarget(this.tiles, { animate: false, finalize: false });
     setTimeout(() => {
       this.randomizeTiles({
         useFullArea: this.params.useFullArea,
