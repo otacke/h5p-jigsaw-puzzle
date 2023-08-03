@@ -39,8 +39,8 @@
       ]
     },
     {
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves.",
+      "label": "Veikimo nustatymai",
+      "description": "Šios parinktys leis jums valdyti, kaip veikia užduotis.",
       "fields": [
         {
           "label": "Show faint background",
@@ -94,7 +94,7 @@
         },
         {
           "label": "Text for \"Retry\" button",
-          "default": "Retry"
+          "default": "Bandyti dar kartą"
         },
         {
           "label": "Text for \"No image\" message",
@@ -103,7 +103,7 @@
       ]
     },
     {
-      "label": "Readspeaker",
+      "label": "Skaitymo garsiakalbis",
       "fields": [
         {
           "label": "Assistive technology description for \"Complete\" button",
@@ -135,7 +135,7 @@
         },
         {
           "label": "Assistive technology description for \"Close\"",
-          "default": "Close"
+          "default": "Uždaryti"
         }
       ]
     }
