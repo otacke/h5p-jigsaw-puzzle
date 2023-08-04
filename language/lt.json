@@ -18,7 +18,7 @@
       "fields": [
         {
           "label": "Pradėkite dėlionę",
-          "description": "Sound to play when puzzle is started."
+          "description": "Garsas, grojamas kai dėlionė paleidžiama."
         },
         {
           "label": "Pick up puzzle tile",
