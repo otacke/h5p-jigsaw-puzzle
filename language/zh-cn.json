@@ -2,7 +2,7 @@
   "semantics": [
     {
       "label": "拼图图片",
-      "description": "将使用该图片进行拼图块的切割。"
+      "description": "应从中切割拼图块的图像。"
     },
     {
       "label": "横向拼图块数",
