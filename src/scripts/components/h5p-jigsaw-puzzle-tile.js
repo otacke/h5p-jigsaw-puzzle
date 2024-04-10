@@ -1,6 +1,6 @@
 import './h5p-jigsaw-puzzle-tile.scss';
 
-import Util from '@services/util';
+import Util from '@services/util.js';
 
 /** Class representing a puzzle tile */
 export default class JigsawPuzzleTile {

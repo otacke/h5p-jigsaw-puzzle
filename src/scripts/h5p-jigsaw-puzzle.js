@@ -1,6 +1,6 @@
 // Import required classes
-import JigsawPuzzleContent from '@scripts/h5p-jigsaw-puzzle-content';
-import Util from '@services/util';
+import JigsawPuzzleContent from '@scripts/h5p-jigsaw-puzzle-content.js';
+import Util from '@services/util.js';
 
 /**
  * Class holding a full JigsawPuzzle.

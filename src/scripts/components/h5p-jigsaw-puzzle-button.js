@@ -1,7 +1,7 @@
 import './h5p-jigsaw-puzzle-button.scss';
 
 // Import required classes
-import Util from '@services/util';
+import Util from '@services/util.js';
 
 /** Class representing the content */
 export default class JigsawPuzzleButton {

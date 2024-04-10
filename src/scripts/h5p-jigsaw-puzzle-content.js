@@ -1,7 +1,7 @@
 // Import required classes
-import JigsawPuzzleTile from '@components/h5p-jigsaw-puzzle-tile';
-import JigsawPuzzleTitlebar from '@components/h5p-jigsaw-puzzle-titlebar';
-import Util from '@services/util';
+import JigsawPuzzleTile from '@components/h5p-jigsaw-puzzle-tile.js';
+import JigsawPuzzleTitlebar from '@components/h5p-jigsaw-puzzle-titlebar.js';
+import Util from '@services/util.js';
 
 /** Class representing the content */
 export default class JigsawPuzzleContent {
