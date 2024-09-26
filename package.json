@@ -1,6 +1,6 @@
 {
   "name": "h5p-jigsaw-puzzle",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "H5P content type for jigsaw puzzle games",
   "private": true,
   "scripts": {
