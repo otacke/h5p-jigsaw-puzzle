@@ -1,15 +1,15 @@
-@import "@styles/h5p-jigsaw-puzzle-main";
+@use "@styles/main";
 
 .h5p-jigsaw-puzzle-title-bar {
   align-items: center;
   background-color: white;
   background-size: cover;
-  box-shadow: $box-shadow-normal;
+  box-shadow: main.$box-shadow-normal;
   display: flex;
   justify-content: flex-end;
-  margin-bottom: $margin-base;
+  margin-bottom: main.$margin-base;
   overflow: hidden;
-  padding: $margin-50;
+  padding: main.$margin-50;
 
   .h5p-jigsaw-puzzle-button-fullscreen {
     flex-grow: 0

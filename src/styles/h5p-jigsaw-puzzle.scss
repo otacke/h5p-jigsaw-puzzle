@@ -1,4 +1,4 @@
-@import "@styles/h5p-jigsaw-puzzle-main";
+@use "@styles/main";
 
 .h5p-jigsaw-puzzle {
 
@@ -22,8 +22,8 @@
       .h5p-jigsaw-puzzle-tile-container {
         background-color: white;
         background-size: cover;
-        border: $border-width-normal solid $color-grey-0-10;
-        box-shadow: $box-shadow-normal;
+        border: main.$border-width-normal solid main.$color-grey-0-10;
+        box-shadow: main.$box-shadow-normal;
         width: 100%;
 
         .h5p-jigsaw-puzzle-background-image {
@@ -48,7 +48,7 @@
         cursor: auto;
 
         &:hover {
-          background: $color-joubel-ui-button;
+          background: main.$color-joubel-ui-button;
         }
       }
     }

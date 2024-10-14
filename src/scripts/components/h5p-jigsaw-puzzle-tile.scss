@@ -1,4 +1,4 @@
-@import "@styles/h5p-jigsaw-puzzle-main";
+@use "@styles/main";
 
 .h5p-jigsaw-puzzle {
 
@@ -26,7 +26,7 @@
       }
 
       &.animate-move {
-        transition: left $default-duration, top $default-duration;
+        transition: left main.$default-duration, top main.$default-duration;
       }
 
       &.hidden {
@@ -35,7 +35,7 @@
       }
 
       svg {
-        filter: drop-shadow( 1px 1px 1px $color-grey-0-50);
+        filter: drop-shadow( 1px 1px 1px main.$color-grey-0-50);
       }
     }
   }
