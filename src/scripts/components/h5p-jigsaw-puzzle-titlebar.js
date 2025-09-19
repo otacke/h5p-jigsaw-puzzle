@@ -24,8 +24,8 @@ export default class JiggsawPuzzleTitlebar {
         buttonFullscreenEnter: 'Enter fullscreen mode',
         buttonFullscreenExit: 'Exit fullscreen mode',
         buttonAudioMute: 'Mute music',
-        buttonAudioUnmute: 'Unmute music'
-      }
+        buttonAudioUnmute: 'Unmute music',
+      },
     }, params);
 
     // Set missing callbacks
@@ -35,7 +35,7 @@ export default class JiggsawPuzzleTitlebar {
       },
       onButtonAudioClicked: () => {
         console.warn('A function for handling the audio button is missing.');
-      }
+      },
     }, callbacks);
 
     this.numberVisibleButtons = 0;
@@ -49,7 +49,7 @@ export default class JiggsawPuzzleTitlebar {
         type: 'toggle',
         classes: [
           'h5p-jigsaw-puzzle-button',
-          'h5p-jigsaw-puzzle-button-audio'
+          'h5p-jigsaw-puzzle-button-audio',
         ],
         disabled: true,
         noTabWhenDisabled: true,
@@ -57,14 +57,14 @@ export default class JiggsawPuzzleTitlebar {
         a11y: {
           active: this.params.a11y.buttonAudioMute,
           inactive: this.params.a11y.buttonAudioUnmute,
-          disabled: this.params.a11y.disabled
-        }
+          disabled: this.params.a11y.disabled,
+        },
       },
       {
         onClick: ((event) => {
           this.callbacks.onButtonAudioClicked(event);
-        })
-      }
+        }),
+      },
     );
     this.titleBar.appendChild(this.buttonAudio.getDOM());
 
@@ -74,7 +74,7 @@ export default class JiggsawPuzzleTitlebar {
         type: 'toggle',
         classes: [
           'h5p-jigsaw-puzzle-button',
-          'h5p-jigsaw-puzzle-button-fullscreen'
+          'h5p-jigsaw-puzzle-button-fullscreen',
         ],
         disabled: true,
         noTabWhenDisabled: true,
@@ -82,14 +82,14 @@ export default class JiggsawPuzzleTitlebar {
         a11y: {
           active: this.params.a11y.buttonFullscreenExit,
           inactive: this.params.a11y.buttonFullscreenEnter,
-          disabled: this.params.a11y.disabled
-        }
+          disabled: this.params.a11y.disabled,
+        },
       },
       {
         onClick: (() => {
           this.callbacks.onButtonFullscreenClicked();
-        })
-      }
+        }),
+      },
     );
     this.titleBar.appendChild(this.buttonFullscreen.getDOM());
   }

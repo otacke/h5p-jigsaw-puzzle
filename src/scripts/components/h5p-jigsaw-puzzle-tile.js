@@ -2,6 +2,150 @@ import './h5p-jigsaw-puzzle-tile.scss';
 
 import Util from '@services/util.js';
 
+// TODO: Could this be made simpler by using percentages?
+
+/** @constant {object} PATHS SVG path for complete tiles */
+const PATHS = {
+  'top-left': [
+    'M @off, @off',
+    'l @w, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0 -@h',
+    'Z',
+  ].join(' '),
+
+  'top-inner': [
+    'M @offknob, @off',
+    'l @w, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+
+  'top-right': [
+    'M @offknob, @off',
+    'l @w, 0',
+    'l 0, @h',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+
+  'inner-left': [
+    'M @off, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0, -@h',
+    'Z',
+  ].join(' '),
+
+  'inner-inner': [
+    'M @offknob, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+
+  'inner-right': [
+    'M @offknob, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @h',
+    'l -@gapw, 0',
+    'a 1 1 0 0 0 -@knob 0',
+    'l -@gapw, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+
+  'bottom-left': [
+    'M @off, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@w, 0',
+    'l 0, -@h',
+    'Z',
+  ].join(' '),
+
+  'bottom-inner': [
+    'M @offknob, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @gaph',
+    'a 1 1 0 0 0 0 @knob',
+    'l 0, @gaph',
+    'l -@w, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+
+  'bottom-right': [
+    'M @offknob, @offknob',
+    'l @gapw, 0',
+    'a 1 1 0 0 1 @knob 0',
+    'l @gapw, 0',
+    'l 0, @h',
+    'l -@w, 0',
+    'l 0, -@gaph',
+    'a 1 1 0 0 1 0 -@knob',
+    'l 0, -@gaph',
+    'Z',
+  ].join(' '),
+};
+
+/** @constant {object} PATHS_BORDER Single SVG path border segments */
+const PATHS_BORDER = {
+  'horizontal-straight': 'l @w, 0',
+  'horizontal-up': 'l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0',
+  'horizontal-down': 'l @gapw, 0 a 1 1 0 0 0 @knob 0 l @gapw, 0',
+  'vertical-straight': 'l 0, @h',
+  'vertical-left': 'l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph',
+  'vertical-right': 'l 0, @gaph a 1 1 0 0 1 0 @knob l 0, @gaph',
+};
+
 /** Class representing a puzzle tile */
 export default class JigsawPuzzleTile {
   /**
@@ -21,7 +165,7 @@ export default class JigsawPuzzleTile {
       onPuzzleTileCreated: () => {},
       onPuzzleTileMoveStarted: () => {},
       onPuzzleTileMoved: () => {},
-      onPuzzleTileMoveEnded: () => {}
+      onPuzzleTileMoveEnded: () => {},
     }, callbacks);
 
     // SVG path borders to be used separately
@@ -92,8 +236,32 @@ export default class JigsawPuzzleTile {
     pattern.setAttribute('id', `h5p-jigsaw-puzzle-${this.params.uuid}-pattern-${this.params.id}`);
     pattern.setAttribute('width', this.params.size.width);
     pattern.setAttribute('height', this.params.size.height);
-    pattern.setAttribute('x', -((this.params.gridPosition.x * this.params.baseWidth * this.scale - Math.sign(this.params.gridPosition.x) * this.knob / 2) / this.width));
-    pattern.setAttribute('y', -((this.params.gridPosition.y * this.params.baseHeight * this.scale - Math.sign(this.params.gridPosition.y) * this.knob / 2) / this.height));
+
+    const calculatePatternOffset = (gridPosition, baseSize, scale, knobSize, tileSize) => {
+      const baseOffset = gridPosition * baseSize * scale;
+      const knobOffset = Math.sign(gridPosition) * knobSize / HALF_DIVISOR;
+      return -((baseOffset - knobOffset) / tileSize);
+    };
+
+    const xOffset = calculatePatternOffset(
+      this.params.gridPosition.x,
+      this.params.baseWidth,
+      this.scale,
+      this.knob,
+      this.width,
+    );
+
+    const yOffset = calculatePatternOffset(
+      this.params.gridPosition.y,
+      this.params.baseHeight,
+      this.scale,
+      this.knob,
+      this.height,
+    );
+
+    pattern.setAttribute('x', xOffset);
+    pattern.setAttribute('y', yOffset);
+
     const image = document.createElement('image');
     image.setAttribute('width', params.image.naturalWidth);
     image.setAttribute('height', params.image.naturalHeight);
@@ -111,7 +279,7 @@ export default class JigsawPuzzleTile {
       width: params.baseWidth,
       height: params.baseHeight,
       type: params.type,
-      stroke: params.stroke
+      stroke: params.stroke,
     }));
     svg.appendChild(path);
 
@@ -127,9 +295,9 @@ export default class JigsawPuzzleTile {
         side: side,
         gridPosition: {
           x: this.params.gridPosition.x,
-          y: this.params.gridPosition.y
+          y: this.params.gridPosition.y,
         },
-        className: `border-${side}`
+        className: `border-${side}`,
       });
 
       svg.appendChild(this.pathBorders[side]);
@@ -160,8 +328,8 @@ export default class JigsawPuzzleTile {
       side: params.side,
       gridPosition: {
         x: this.params.gridPosition.x,
-        y: this.params.gridPosition.y
-      }
+        y: this.params.gridPosition.y,
+      },
     }));
 
     return pathDOM;
@@ -173,16 +341,19 @@ export default class JigsawPuzzleTile {
    * @returns {string} SVG path.
    */
   buildPathSegment(params = {}) {
+    // eslint-disable-next-line no-magic-numbers
     const knob = Math.min(params.width, params.height) / 2;
 
     // Offset for side and knob
     let offsetX = (params.side === 'right') ? params.width : 0;
     if (params.gridPosition.x !== 0) {
+      // eslint-disable-next-line no-magic-numbers
       offsetX += params.stroke / 2 + knob / 2;
     }
 
     let offsetY = (params.side === 'bottom') ? params.height : 0;
     if (params.gridPosition.y !== 0) {
+      // eslint-disable-next-line no-magic-numbers
       offsetY += params.stroke / 2 + knob / 2;
     }
 
@@ -190,13 +361,15 @@ export default class JigsawPuzzleTile {
     const offset = `M ${offsetX}, ${offsetY}`;
     const pathSide = (params.side === 'top' || params.side === 'bottom') ? 'horizontal' : 'vertical';
 
-    const path = JigsawPuzzleTile.PATHS_BORDER[`${pathSide}-${params.orientation}`];
+    const path = PATHS_BORDER[`${pathSide}-${params.orientation}`];
 
     return `${offset} ${path}`
       .replace(/@w/g, params.width)
       .replace(/@h/g, params.height)
       .replace(/@knob/g, knob)
+      // eslint-disable-next-line no-magic-numbers
       .replace(/@gapw/g, (params.width - knob) / 2)
+      // eslint-disable-next-line no-magic-numbers
       .replace(/@gaph/g, (params.height - knob) / 2);
   }
 
@@ -209,15 +382,20 @@ export default class JigsawPuzzleTile {
    * @returns {string} SVG path dash.
    */
   buildPathDash(params = {}) {
+    // eslint-disable-next-line no-magic-numbers
     const knob = Math.min(params.width, params.height) / 2;
 
-    return JigsawPuzzleTile.PATHS[params.type]
+    return PATHS[params.type]
+    // eslint-disable-next-line no-magic-numbers
       .replace(/@offknob/g, params.stroke / 2 + knob / 2)
+      // eslint-disable-next-line no-magic-numbers
       .replace(/@off/g, params.stroke / 2)
       .replace(/@w/g, params.width)
       .replace(/@h/g, params.height)
       .replace(/@knob/g, knob)
+      // eslint-disable-next-line no-magic-numbers
       .replace(/@gapw/g, (params.width - knob) / 2)
+      // eslint-disable-next-line no-magic-numbers
       .replace(/@gaph/g, (params.height - knob) / 2);
   }
 
@@ -249,7 +427,7 @@ export default class JigsawPuzzleTile {
   getGridPosition() {
     return {
       x: this.params.gridPosition.x,
-      y: this.params.gridPosition.y
+      y: this.params.gridPosition.y,
     };
   }
 
@@ -296,7 +474,7 @@ export default class JigsawPuzzleTile {
       width: this.width,
       height: this.height,
       knob: this.knob,
-      stroke: this.stroke
+      stroke: this.stroke,
     };
   }
 
@@ -311,7 +489,7 @@ export default class JigsawPuzzleTile {
 
     return {
       x: parseFloat(this.tile.style.left),
-      y: parseFloat(this.tile.style.top)
+      y: parseFloat(this.tile.style.top),
     };
   }
 
@@ -446,7 +624,7 @@ export default class JigsawPuzzleTile {
       height: this.params.height,
       stroke: this.params.stroke,
       image: this.backgroundImage,
-      type: this.params.type
+      type: this.params.type,
     });
 
     this.tile.innerHTML = svg.outerHTML;
@@ -511,13 +689,13 @@ export default class JigsawPuzzleTile {
     if (event.type === 'touchmove') {
       this.setPosition({
         x: this.moveInitialX + event.touches[0].clientX,
-        y: this.moveInitialY + event.touches[0].clientY
+        y: this.moveInitialY + event.touches[0].clientY,
       });
     }
     else {
       this.setPosition({
         x: this.moveInitialX + event.clientX,
-        y: this.moveInitialY + event.clientY
+        y: this.moveInitialY + event.clientY,
       });
     }
 
@@ -549,27 +727,4 @@ export default class JigsawPuzzleTile {
   }
 }
 
-// TODO: Could this be made simpler by using percentages?
 
-/** constant {object} SVG path for complete tiles */
-JigsawPuzzleTile.PATHS = {
-  'top-left': 'M @off, @off l @w, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0 -@h Z',
-  'top-inner': 'M @offknob, @off l @w, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z',
-  'top-right': 'M @offknob, @off l @w, 0 l 0, @h l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z',
-  'inner-left': 'M @off, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0, -@h Z',
-  'inner-inner': 'M @offknob, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z',
-  'inner-right': 'M @offknob, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @h l -@gapw, 0 a 1 1 0 0 0 -@knob 0 l -@gapw, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z',
-  'bottom-left': 'M @off, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@w, 0 l 0, -@h Z',
-  'bottom-inner': 'M @offknob, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph l -@w, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z',
-  'bottom-right': 'M @offknob, @offknob l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0 l 0, @h l -@w, 0 l 0, -@gaph a 1 1 0 0 1 0 -@knob l 0, -@gaph Z'
-};
-
-/** constant {object} Single SVG path border segments */
-JigsawPuzzleTile.PATHS_BORDER = {
-  'horizontal-straight': 'l @w, 0',
-  'horizontal-up': 'l @gapw, 0 a 1 1 0 0 1 @knob 0 l @gapw, 0',
-  'horizontal-down': 'l @gapw, 0 a 1 1 0 0 0 @knob 0 l @gapw, 0',
-  'vertical-straight': 'l 0, @h',
-  'vertical-left': 'l 0, @gaph a 1 1 0 0 0 0 @knob l 0, @gaph',
-  'vertical-right': 'l 0, @gaph a 1 1 0 0 1 0 @knob l 0, @gaph'
-};

@@ -16,14 +16,14 @@ export default class JigsawPuzzleButton {
       a11y: {
         active: '',
         disabled: '',
-        inactive: ''
+        inactive: '',
       },
       active: false,
       classes: [],
       disabled: false,
       hidden: false,
       type: 'pulse',
-      noTabWhenDisabled: false
+      noTabWhenDisabled: false,
     }, params || {});
 
     if (!Array.isArray(this.params.classes)) {
@@ -45,7 +45,7 @@ export default class JigsawPuzzleButton {
 
     // Sanitize callbacks
     this.callbacks = Util.extend({
-      onClick: () => {}
+      onClick: () => {},
     }, callbacks);
 
     // Button

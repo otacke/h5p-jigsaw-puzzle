@@ -3,6 +3,18 @@ import JigsawPuzzleTile from '@components/h5p-jigsaw-puzzle-tile.js';
 import JigsawPuzzleTitlebar from '@components/h5p-jigsaw-puzzle-titlebar.js';
 import Util from '@services/util.js';
 
+/** @constant {number} SLIGHT_OPACITY Slight opacity value. */
+const SLIGHT_OPACITY = 0.05;
+
+/** @constant {number} RGB_WITH_ALPHA_LENGTH Length of RGBA array. */
+const RGB_WITH_ALPHA_LENGTH = 4;
+
+/** @constant {number} RESIZE_TIMEOUT_SMALL_MS Timeout for large images. */
+const RESIZE_TIMEOUT_SMALL_MS = 250;
+
+/** @constant {number} RESIZE_TIMEOUT_LARGE_MS Timeout to resize. */
+const RESIZE_TIMEOUT_LARGE_MS = 500;
+
 /** Class representing the content */
 export default class JigsawPuzzleContent {
   /**
@@ -31,7 +43,7 @@ export default class JigsawPuzzleContent {
       onResize: () => {},
       onCompleted: () => {},
       onButtonFullscreenClicked: () => {},
-      onInteracted: () => {}
+      onInteracted: () => {},
     }, callbacks);
 
     // Audios
@@ -48,7 +60,7 @@ export default class JigsawPuzzleContent {
     // Maximum size (in fullscreen mode)
     this.maxSize = {
       heigth: null,
-      width: null
+      width: null,
     };
 
     // Border size, fallback fixed 2px for Firefox that's too slow to paint :-/
@@ -116,8 +128,8 @@ export default class JigsawPuzzleContent {
           buttonFullscreenExit: this.params.a11y.buttonFullscreenExit,
           buttonAudioMute: this.params.a11y.buttonAudioMute,
           buttonAudioUnmute: this.params.a11y.buttonAudioUnmute,
-          disabled: this.params.a11y.disabled
-        }
+          disabled: this.params.a11y.disabled,
+        },
       },
       {
         onButtonAudioClicked: ((event) => {
@@ -125,8 +137,8 @@ export default class JigsawPuzzleContent {
         }),
         onButtonFullscreenClicked: ((event) => {
           this.handleButtonFullscreenClicked(event);
-        })
-      }
+        }),
+      },
     );
 
     this.content.appendChild(this.titlebar.getDOM());
@@ -176,28 +188,31 @@ export default class JigsawPuzzleContent {
   createPuzzleTile(params) {
     const baseWidth = this.image.naturalWidth / this.params.size.width;
     const baseHeight = this.image.naturalHeight / this.params.size.height;
+    // eslint-disable-next-line no-magic-numbers
     const knobSize = Math.min(baseWidth, baseHeight) / 2;
+    // eslint-disable-next-line no-magic-numbers
     const tileWidth = baseWidth + ((params.x > 0) ? knobSize / 2 : 0);
+    // eslint-disable-next-line no-magic-numbers
     const tileHeight = baseHeight + ((params.y > 0) ? knobSize / 2 : 0);
 
     // Border types
     const borders = {
       top: {
         orientation: (params.y === 0) ? 'straight' : 'up',
-        opacity: 1
+        opacity: 1,
       },
       right: {
         orientation: (params.x + 1 === this.params.size.width) ? 'straight' : 'left',
-        opacity: 1
+        opacity: 1,
       },
       bottom: {
         orientation: (params.y + 1 === this.params.size.height) ? 'straight' : 'up',
-        opacity: 1
+        opacity: 1,
       },
       left: {
         orientation: (params.x === 0) ? 'straight' : 'left',
-        opacity: 1
-      }
+        opacity: 1,
+      },
     };
 
     // Alignment
@@ -234,7 +249,7 @@ export default class JigsawPuzzleContent {
         borders: borders,
         uuid: this.params.uuid,
         container: this.puzzleArea,
-        size: this.params.size
+        size: this.params.size,
       },
       {
         onPuzzleTileCreated: ((tile) => {
@@ -248,8 +263,8 @@ export default class JigsawPuzzleContent {
         }),
         onPuzzleTileMoveEnded: ((tile) => {
           this.handlePuzzleTileMoveEnded(tile);
-        })
-      }
+        }),
+      },
     );
   }
 
@@ -278,20 +293,20 @@ export default class JigsawPuzzleContent {
 
     if (params.animate) {
       params.tile.animateMove({
-        duration: params.duration
+        duration: params.duration,
       });
     }
 
     // Required for resizing, relative position of tile in puzzle dropzone
     this.tiles[params.tile.getId()].position = {
       x: (params.x - this.puzzleDropzone.offsetLeft) / this.puzzleDropzone.offsetWidth,
-      y: (params.y - this.puzzleDropzone.offsetTop) / this.puzzleDropzone.offsetHeight
+      y: (params.y - this.puzzleDropzone.offsetTop) / this.puzzleDropzone.offsetHeight,
     };
 
     // Absolute tile position on screen
     params.tile.setPosition({
       x: params.x,
-      y: params.y
+      y: params.y,
     });
   }
 
@@ -356,7 +371,7 @@ export default class JigsawPuzzleContent {
     // Add custom overrides of default included audios
     [
       'puzzleStarted', 'puzzleTilePickUp', 'puzzleTileCorrect',
-      'puzzleTileIncorrect', 'puzzleCompleted'
+      'puzzleTileIncorrect', 'puzzleCompleted',
     ].forEach((id) => {
       if (this.params.sound[id] && this.params.sound[id].length > 0 && this.params.sound[id][0].path) {
         H5P.SoundJS.registerSound(H5P.getPath(this.params.sound[id][0].path, this.params.contentId), id);
@@ -427,20 +442,29 @@ export default class JigsawPuzzleContent {
       // Compute maximum available height and width
       const styleContent = window.getComputedStyle(this.h5pQuestionContent);
       const marginContentVertical = parseFloat(styleContent.getPropertyValue('margin-bottom'));
-      const marginContentHorizontal = parseFloat(styleContent.getPropertyValue('margin-left')) + parseFloat(styleContent.getPropertyValue('margin-right'));
+      const marginContentHorizontal = parseFloat(
+        styleContent.getPropertyValue('margin-left')) + parseFloat(styleContent.getPropertyValue('margin-right'),
+      );
 
       const styleButtons = window.getComputedStyle(this.h5pQuestionButtons);
-      const marginButtons = parseFloat(styleButtons.getPropertyValue('margin-bottom')) + parseFloat(styleButtons.getPropertyValue('margin-top'));
+      const marginButtons = parseFloat(
+        styleButtons.getPropertyValue('margin-bottom')) + parseFloat(styleButtons.getPropertyValue('margin-top'),
+      );
 
       this.maxSize = {
-        height: window.innerHeight - 2 * this.params.stroke - this.puzzleArea.offsetTop - marginContentVertical - marginButtons - this.h5pQuestionButtons.offsetHeight,
-        width: (window.innerWidth - 2 * this.params.stroke - marginContentHorizontal) * (100 - this.params.sortingSpace) / 100
+        // eslint-disable-next-line no-magic-numbers
+        height: window.innerHeight - 2 * this.params.stroke - this.puzzleArea.offsetTop - marginContentVertical -
+          marginButtons - this.h5pQuestionButtons.offsetHeight,
+
+        // eslint-disable-next-line no-magic-numbers
+        width: (window.innerWidth - 2 * this.params.stroke -
+          marginContentHorizontal) * (100 - this.params.sortingSpace) / 100,
       };
     }
     else {
       this.maxSize = {
         heigth: null,
-        width: null
+        width: null,
       };
     }
 
@@ -461,7 +485,7 @@ export default class JigsawPuzzleContent {
       this.randomizeTiles({
         useFullArea: this.params.useFullArea,
         layout: this.params.randomizerPattern,
-        keepDone: false
+        keepDone: false,
       });
 
       this.isAnswerGiven = false;
@@ -496,7 +520,7 @@ export default class JigsawPuzzleContent {
     const maxTileSize = this.tiles.reduce((max, current) => {
       return {
         width: Math.max(max.width, current.instance.getSize().width),
-        height: Math.max(max.height, current.instance.getSize().height)
+        height: Math.max(max.height, current.instance.getSize().height),
       };
     }, { width: 0, height: 0 });
 
@@ -508,7 +532,7 @@ export default class JigsawPuzzleContent {
     // Compute offset
     const offset = {
       left: this.puzzleArea.offsetLeft,
-      top: this.puzzleArea.offsetTop
+      top: this.puzzleArea.offsetTop,
     };
 
     if (!useFullArea) {
@@ -524,7 +548,7 @@ export default class JigsawPuzzleContent {
     // Compute maximum size of area
     const maxPos = {
       x: this.sortingArea.offsetWidth - maxTileSize.width,
-      y: this.sortingArea.offsetHeight - maxTileSize.height
+      y: this.sortingArea.offsetHeight - maxTileSize.height,
     };
 
     if (useFullArea) {
@@ -555,7 +579,7 @@ export default class JigsawPuzzleContent {
         tile: currentTile,
         x: x,
         y: y,
-        animate: true
+        animate: true,
       });
     });
   }
@@ -572,16 +596,26 @@ export default class JigsawPuzzleContent {
     const currentSize = tileInstance.getSize();
     const currentGridPosition = tileInstance.getGridPosition();
 
+    const calculateKnobOffset = (gridPosition, knobSize) => {
+      // eslint-disable-next-line no-magic-numbers
+      return Math.sign(gridPosition) * knobSize / 2 + gridPosition * knobSize / 2;
+    };
+
     const targetPosition = {
-      x: this.puzzleDropzone.offsetLeft + currentGridPosition.x * currentSize.width - Math.sign(currentGridPosition.x) * currentSize.knob / 2 - currentGridPosition.x * currentSize.knob / 2,
-      y: this.puzzleDropzone.offsetTop + currentGridPosition.y * currentSize.height - Math.sign(currentGridPosition.y) * currentSize.knob / 2 - currentGridPosition.y * currentSize.knob / 2
+      x: this.puzzleDropzone.offsetLeft +
+        currentGridPosition.x * currentSize.width -
+        calculateKnobOffset(currentGridPosition.x, currentSize.knob),
+
+      y: this.puzzleDropzone.offsetTop +
+        currentGridPosition.y * currentSize.height -
+        calculateKnobOffset(currentGridPosition.y, currentSize.knob),
     };
 
     this.setTilePosition({
       tile: tileInstance,
       x: targetPosition.x,
       y: targetPosition.y,
-      animate: params.animate
+      animate: params.animate,
     });
   }
 
@@ -635,9 +669,22 @@ export default class JigsawPuzzleContent {
     const currentSize = tile.getSize();
     const currentGridPosition = tile.getGridPosition();
 
+    const calculateKnobOffset = (gridPosition, knobSize) => {
+      // eslint-disable-next-line no-magic-numbers
+      const signOffset = Math.sign(gridPosition) * knobSize / 2;
+      // eslint-disable-next-line no-magic-numbers
+      const positionOffset = gridPosition * knobSize / 2;
+      return signOffset + positionOffset;
+    };
+
     const targetPosition = {
-      x: this.puzzleDropzone.offsetLeft + currentGridPosition.x * currentSize.width - Math.sign(currentGridPosition.x) * currentSize.knob / 2 - currentGridPosition.x * currentSize.knob / 2,
-      y: this.puzzleDropzone.offsetTop + currentGridPosition.y * currentSize.height - Math.sign(currentGridPosition.y) * currentSize.knob / 2 - currentGridPosition.y * currentSize.knob / 2
+      x: this.puzzleDropzone.offsetLeft +
+        currentGridPosition.x * currentSize.width -
+        calculateKnobOffset(currentGridPosition.x, currentSize.knob),
+
+      y: this.puzzleDropzone.offsetTop +
+        currentGridPosition.y * currentSize.height -
+        calculateKnobOffset(currentGridPosition.y, currentSize.knob),
     };
 
     this.puzzleOutlines[index].style.left = `${targetPosition.x}px`;
@@ -769,7 +816,7 @@ export default class JigsawPuzzleContent {
   getCurrentState() {
     return {
       audioButtonState: this.titlebar.getAudioButtonState(),
-      tiles: this.tiles.map((tile) => tile.instance.isDone)
+      tiles: this.tiles.map((tile) => tile.instance.isDone),
     };
   }
 
@@ -780,7 +827,7 @@ export default class JigsawPuzzleContent {
   handleImageLoaded(format) {
     this.originalSize = {
       width: this.image.naturalWidth,
-      height: this.image.naturalHeight
+      height: this.image.naturalHeight,
     };
 
     for (let y = 0; y < this.params.size.height; y++) {
@@ -789,12 +836,12 @@ export default class JigsawPuzzleContent {
           instance: this.createPuzzleTile({
             x: x,
             y: y,
-            format: format
+            format: format,
           }),
           position: {
             x: 0,
-            y: 0
-          }
+            y: 0,
+          },
         });
       }
     }
@@ -826,7 +873,7 @@ export default class JigsawPuzzleContent {
       const regularScale = (this.puzzleDropzone.offsetWidth - this.borderWidth) / this.originalSize.width;
       const regularSize = {
         height: regularScale * this.originalSize.height - this.borderWidth,
-        width: regularScale * this.originalSize.width - this.borderWidth
+        width: regularScale * this.originalSize.width - this.borderWidth,
       };
 
       /*
@@ -835,15 +882,25 @@ export default class JigsawPuzzleContent {
        * dropzone has already been scaled in fullscreen mode - may toggle back
        * to regular mode otherwise due to size detection delay
        */
-      if (this.maxSize.height && (this.puzzleDropzone.style.width || regularSize.height > this.maxSize.height || regularSize.width > this.maxSize.width)) {
-        if ((this.maxSize.height - this.borderWidth) / this.originalSize.height < (this.maxSize.width - this.borderWidth) / this.originalSize.width) {
-          this.scale = (this.maxSize.height - this.borderWidth) / this.originalSize.height;
+
+      const isSizeOutOfBounds = regularSize.height > this.maxSize.height || regularSize.width > this.maxSize.width;
+
+      if (this.maxSize.height && (this.puzzleDropzone.style.width || isSizeOutOfBounds)) {
+
+        const heightScale = (this.maxSize.height - this.borderWidth) / this.originalSize.height;
+        const widthScale = (this.maxSize.width - this.borderWidth) / this.originalSize.width;
+        const isHorizontal = heightScale < widthScale;
+
+        if (isHorizontal) {
+          this.scale = heightScale;
+          // eslint-disable-next-line no-magic-numbers
           this.puzzleDropzone.style.height = `${this.maxSize.height - 2 * this.borderWidth}px`;
           this.puzzleDropzone.style.width = `${this.scale * this.originalSize.width - this.borderWidth}px`;
         }
         else {
-          this.scale = (this.maxSize.width - this.borderWidth) / this.originalSize.width;
+          this.scale = widthScale;
           this.puzzleDropzone.style.height = `${this.scale * this.originalSize.height - this.borderWidth}px`;
+          // eslint-disable-next-line no-magic-numbers
           this.puzzleDropzone.style.width = `${this.maxSize.width - 2 * this.borderWidth}px`;
         }
         this.puzzleDropzone.style.flexShrink = 0;
@@ -869,7 +926,7 @@ export default class JigsawPuzzleContent {
         // Recompute position with offset
         tile.instance.setPosition({
           x: tile.position.x * this.puzzleDropzone.offsetWidth + this.puzzleDropzone.offsetLeft,
-          y: tile.position.y * this.puzzleDropzone.offsetHeight + this.puzzleDropzone.offsetTop
+          y: tile.position.y * this.puzzleDropzone.offsetHeight + this.puzzleDropzone.offsetTop,
         });
 
         if (this.puzzleOutlines) {
@@ -928,8 +985,18 @@ export default class JigsawPuzzleContent {
     this.tiles[tile.getId()].position = currentPosition;
 
     const targetPosition = {
-      x: this.puzzleDropzone.offsetLeft + currentGridPosition.x * currentSize.width - Math.sign(currentGridPosition.x) * currentSize.knob / 2 - currentGridPosition.x * currentSize.knob / 2,
-      y: this.puzzleDropzone.offsetTop + currentGridPosition.y * currentSize.height - Math.sign(currentGridPosition.y) * currentSize.knob / 2 - currentGridPosition.y * currentSize.knob / 2
+      x: this.puzzleDropzone.offsetLeft +
+        currentGridPosition.x * currentSize.width -
+        // eslint-disable-next-line no-magic-numbers
+        Math.sign(currentGridPosition.x) * currentSize.knob / 2 -
+        // eslint-disable-next-line no-magic-numbers
+        currentGridPosition.x * currentSize.knob / 2,
+      y: this.puzzleDropzone.offsetTop +
+        currentGridPosition.y * currentSize.height -
+        // eslint-disable-next-line no-magic-numbers
+        Math.sign(currentGridPosition.y) * currentSize.knob / 2 -
+        // eslint-disable-next-line no-magic-numbers
+        currentGridPosition.y * currentSize.knob / 2,
     };
 
     // If tile if dropped close enough to target, snap it there
@@ -941,7 +1008,7 @@ export default class JigsawPuzzleContent {
       this.setTilePosition({
         tile: tile,
         x: targetPosition.x,
-        y: targetPosition.y
+        y: targetPosition.y,
       });
 
       // Final position set
@@ -954,7 +1021,7 @@ export default class JigsawPuzzleContent {
       this.setTilePosition({
         tile: tile,
         x: currentPosition.x,
-        y: currentPosition.y
+        y: currentPosition.y,
       });
 
       tile.setDone(false);
@@ -1023,13 +1090,13 @@ export default class JigsawPuzzleContent {
           .getPropertyValue('border-color')
           .replace(/[^.^\d,]/g, '')
           .split(',')
-          .map((value) => parseFloat(value, 10));
+          .map((value) => parseFloat(value));
 
-        if (rgba.length === 4) {
+        if (rgba.length === RGB_WITH_ALPHA_LENGTH) {
           rgba[3] /= 2;
         }
         else {
-          rgba = [0, 0, 0, 0.05];
+          rgba = [0, 0, 0, SLIGHT_OPACITY];
         }
         rgba = `rgba(${rgba.join(',')})`;
 
@@ -1106,7 +1173,7 @@ export default class JigsawPuzzleContent {
     setTimeout(() => {
       this.randomizeTiles({
         useFullArea: this.params.useFullArea,
-        keepDone: Object.keys(this.params.previousState).length > 0
+        keepDone: Object.keys(this.params.previousState).length > 0,
       });
 
       this.startAudio('puzzleStarted');
@@ -1116,9 +1183,9 @@ export default class JigsawPuzzleContent {
 
         setTimeout(() => {
           this.handleResized();
-        }, 250); // For large images
+        }, RESIZE_TIMEOUT_SMALL_MS);
       });
-    }, 500);
+    }, RESIZE_TIMEOUT_LARGE_MS);
   }
 
   /**

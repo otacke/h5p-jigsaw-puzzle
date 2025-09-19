@@ -2,6 +2,21 @@
 import JigsawPuzzleContent from '@scripts/h5p-jigsaw-puzzle-content.js';
 import Util from '@services/util.js';
 
+/** @constant {number} BASE_VIEWPORT_WIDTH_PX Base viewport width for stroke calculation. */
+const BASE_VIEWPORT_WIDTH_PX = 750;
+
+/** @constant {number} MIN_STROKE_WIDTH_PX Minimum stroke width. */
+const MIN_STROKE_WIDTH_PX = 1.75;
+
+/** @constant {number} RESIZE_TIMEOUT_SMALL_MS Short timeout in ms. */
+const RESIZE_TIMEOUT_SMALL_MS = 100;
+
+/** @constant {number} RESIZE_TIMEOUT_LARGE_MS Long timeout in ms. */
+const RESIZE_TIMEOUT_LARGE_MS = 500;
+
+/** @constant {number} SCREEN_TIMEOUT_MS Timeout for fullscreen/screen orientation change in ms. */
+const SCREEN_TIMEOUT_MS = 200;
+
 /**
  * Class holding a full JigsawPuzzle.
  */
@@ -35,12 +50,12 @@ export default class JigsawPuzzle extends H5P.Question {
         enableSolutionsButton: true,
         enableRetry: true,
         showBackground: true,
-        showPuzzleOutlines: true
+        showPuzzleOutlines: true,
       },
       l10n: {
         complete: 'Complete',
         tryAgain: 'Retry',
-        messageNoImage: 'There was no image given for this jigsaw puzzle.'
+        messageNoImage: 'There was no image given for this jigsaw puzzle.',
       },
       a11y: {
         buttonFullscreenEnter: 'Enter fullscreen mode',
@@ -48,8 +63,8 @@ export default class JigsawPuzzle extends H5P.Question {
         complete: 'Complete the puzzle. All tiles will be put to their correct position.',
         tryAgain: 'Retry the puzzle. All puzzle tiles will be shuffled on the canvas.',
         disabled: 'Disabled',
-        close: 'Close'
-      }
+        close: 'Close',
+      },
     }, params);
 
     // Sanitize for use as text
@@ -97,13 +112,13 @@ export default class JigsawPuzzle extends H5P.Question {
         showPuzzleOutlines: this.params.behaviour.showPuzzleOutlines,
         size: {
           width: this.params.tilesHorizontal,
-          height: this.params.tilesVertical
+          height: this.params.tilesVertical,
         },
         sortingSpacePosition: this.params.behaviour.sortingSpacePosition,
         sortingSpace: this.params.behaviour.sortingSpace,
         sortingSpaceColumn: this.params.behaviour.sortingSpaceColumn,
         sound: this.params.sound || {},
-        stroke: Math.max(window.innerWidth / 750, 1.75),
+        stroke: Math.max(window.innerWidth / BASE_VIEWPORT_WIDTH_PX, MIN_STROKE_WIDTH_PX),
         tileBorderColor: 'rgba(88, 88, 88, 0.5)',
         useFullArea: this.params.behaviour.useFullArea,
         uuid: this.uuid,
@@ -111,11 +126,11 @@ export default class JigsawPuzzle extends H5P.Question {
           buttonFullscreenEnter: this.params.a11y.buttonFullscreenEnter,
           buttonFullscreenExit: this.params.a11y.buttonFullscreenExit,
           disabled: this.params.a11y.disabled,
-          close: this.params.a11y.close
+          close: this.params.a11y.close,
         },
         l10n: {
-          messageNoImage: this.params.l10n.messageNoImage
-        }
+          messageNoImage: this.params.l10n.messageNoImage,
+        },
       },
       {
         onResize: (() => {
@@ -133,8 +148,8 @@ export default class JigsawPuzzle extends H5P.Question {
         onInteracted: (() => {
           // Handle interacted
           this.handleInteracted();
-        })
-      }
+        }),
+      },
     );
 
     // Register content with H5P.Question
@@ -168,7 +183,7 @@ export default class JigsawPuzzle extends H5P.Question {
       if (H5P.isFullscreen) {
         setTimeout(() => { // Needs time to rotate for window.innerHeight
           this.content.setFixedHeight(true);
-        }, 200);
+        }, SCREEN_TIMEOUT_MS);
       }
     }, false);
   }
@@ -183,9 +198,10 @@ export default class JigsawPuzzle extends H5P.Question {
       this.params.l10n.complete, () => {
         this.handleClickButtonComplete({ xAPI: true });
       },
-      this.params.behaviour.enableComplete && this.previousState?.tiles?.some((done) => !done),
+      this.params.behaviour.enableComplete &&
+        this.previousState?.tiles?.some((done) => !done),
       { 'aria-label': this.params.a11y.complete },
-      {}
+      {},
     );
 
     // Retry button
@@ -194,9 +210,10 @@ export default class JigsawPuzzle extends H5P.Question {
       this.params.l10n.tryAgain, () => {
         this.handleClickButtonRetry();
       },
-      this.params.behaviour.enableRetry && (!!this.previousState?.tiles && this.previousState?.tiles?.some((done) => done)),
+      this.params.behaviour.enableRetry &&
+        (!!this.previousState?.tiles && this.previousState?.tiles?.some((done) => done)),
       { 'aria-label': this.params.a11y.tryAgain },
-      {}
+      {},
     );
   }
 
@@ -274,11 +291,11 @@ export default class JigsawPuzzle extends H5P.Question {
 
       setTimeout(() => {
         this.trigger('resize');
-      }, 100); // Small images
+      }, RESIZE_TIMEOUT_SMALL_MS); // Small images
 
       setTimeout(() => {
         this.trigger('resize');
-      }, 500); // Large images take more time
+      }, RESIZE_TIMEOUT_LARGE_MS); // Large images take more time
     }
   }
 
@@ -347,7 +364,7 @@ export default class JigsawPuzzle extends H5P.Question {
    */
   getXAPIData() {
     return ({
-      statement: this.getXAPIAnsweredEvent().data.statement
+      statement: this.getXAPIAnsweredEvent().data.statement,
     });
   }
 
@@ -389,7 +406,7 @@ export default class JigsawPuzzle extends H5P.Question {
       name: { 'en-US': this.getTitle() },
       description: { 'en-US': description },
       type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
-      interactionType: 'other'
+      interactionType: 'other',
     };
   }
 
@@ -452,7 +469,7 @@ export default class JigsawPuzzle extends H5P.Question {
         this.on('enterFullScreen', () => {
           setTimeout(() => { // Needs time to get into fullscreen for window.innerHeight
             this.content.toggleFullscreen(true);
-          }, 200);
+          }, SCREEN_TIMEOUT_MS);
         });
 
         this.on('exitFullScreen', () => {
@@ -465,7 +482,7 @@ export default class JigsawPuzzle extends H5P.Question {
 
       // H5P.Question doesn't allow us to access these directly :-/
       this.buttons = {};
-      this.buttons['complete'] = this.container.querySelector('.h5p-question-complete');
+      this.buttons.complete = this.container.querySelector('.h5p-question-complete');
       this.buttons['try-again'] = this.container.querySelector('.h5p-question-try-again');
     }
   }
