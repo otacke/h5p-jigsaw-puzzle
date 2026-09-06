@@ -2,6 +2,9 @@ import './h5p-jigsaw-puzzle-tile.scss';
 
 import Util from '@services/util.js';
 
+/** @constant {number} HALF_DIVISOR Divisior by 2. */
+const HALF_DIVISOR = 2;
+
 // TODO: Could this be made simpler by using percentages?
 
 /** @constant {object} PATHS SVG path for complete tiles */
